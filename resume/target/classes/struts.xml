@@ -4,7 +4,7 @@
     "http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
     <package name="resume" extends="struts-default">
-        <action name="addAdmin" class="regAction">
+        <action name="*Admin" class="com.zhangzj.resume.action.AdminAction" method="{1}">
             <result name="success">success.jsp</result>
         </action>
     </package>
