@@ -70,6 +70,11 @@
       <artifactId>spring-web</artifactId>
       <version>${springframework.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-aop</artifactId>
+      <version>${springframework.version}</version>
+    </dependency>
 	<dependency>
 	  <groupId>org.hibernate</groupId>
 	  <artifactId>hibernate-core</artifactId>
@@ -92,15 +97,25 @@
     </dependency>
     
     <dependency>
+	    <groupId>mysql</groupId>
+	    <artifactId>mysql-connector-java</artifactId>
+	    <version>5.1.18</version>
+	</dependency>
+    <dependency>
+	    <groupId>commons-io</groupId>
+	    <artifactId>commons-io</artifactId>
+	    <version>2.4</version>
+	</dependency>
+	<dependency> 
+	    <groupId>org.aspectj</groupId> 
+	    <artifactId>aspectjweaver</artifactId> 
+	    <version>1.6.12</version> 
+	</dependency>
+    <dependency>
 	    <groupId>c3p0</groupId>
 	    <artifactId>c3p0</artifactId>
 	    <version>0.9.1.2</version>
 	</dependency>
-    <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <version>${log4j.version}</version>
-    </dependency>
   </dependencies>
   <build>
     <finalName>resume</finalName>

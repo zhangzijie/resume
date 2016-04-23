@@ -7,7 +7,7 @@ import com.zhangzj.resume.entity.Admin;
 @SuppressWarnings("serial")
 public class AdminAction extends ActionSupport {
   private AdminDao adminDao;
-  private String id;
+  private int id;
   private String username;
   private String password;
   
@@ -34,11 +34,11 @@ public class AdminAction extends ActionSupport {
     this.adminDao = adminDao;
   }
 
-  public String getId() {
+  public int getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(int id) {
     this.id = id;
   }
 

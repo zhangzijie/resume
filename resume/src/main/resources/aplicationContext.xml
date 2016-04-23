@@ -19,9 +19,9 @@
         <property name="initialPoolSize" value="1"></property>
         <property name="maxIdleTime" value="20"></property>
     </bean>
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"></property>
-        <property name="mappingResources">
+        <property name="mappingDirectoryLocations">
             <list>
                 <value>classpath*:com/zhangzj/resume/entity/</value>
             </list>
@@ -33,7 +33,7 @@
             </props>
         </property>
     </bean>
-    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
