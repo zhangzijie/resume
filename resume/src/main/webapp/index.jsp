@@ -9,7 +9,7 @@
 </head>
 <body>
     <s:form action="addAdmin" method="post">
-        <s:textfield name="id" label="ID" />
+        <s:hidden name="id"/>
         <s:textfield name="username" label="用户名" />
         <s:password name="password" label="密码" />
         <s:submit value="submit"></s:submit>

@@ -1,6 +1,6 @@
 package com.zhangzj.resume.dao.impl;
 
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
 import com.zhangzj.resume.dao.AdminDao;
 import com.zhangzj.resume.entity.Admin;
