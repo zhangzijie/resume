@@ -7,14 +7,12 @@ import com.zhangzj.resume.entity.Admin;
 @SuppressWarnings("serial")
 public class AdminAction extends ActionSupport {
   private AdminDao adminDao;
-  private int id;
   private String username;
   private String password;
   
   public String addAdmin() {
     try{
       Admin admin = new Admin();
-      admin.setId(this.getId());
       admin.setUsername(this.getUsername());
       admin.setPassword(this.getPassword());
       adminDao.addAdmin(admin);
@@ -22,9 +20,22 @@ public class AdminAction extends ActionSupport {
       ex.printStackTrace();
       return ERROR;
     }
-    
     return SUCCESS;
   }
+  
+  public String deleteAdmin() {
+    try{
+      Admin admin = new Admin();
+      admin.setUsername(this.getUsername());
+      admin.setPassword(this.getPassword());
+      adminDao.deleteAdmin(admin);
+    } catch (Exception ex) {
+      ex.printStackTrace();
+      return ERROR;
+    }
+    return SUCCESS;
+  }
+  
 
   public AdminDao getAdminDao() {
     return adminDao;
@@ -32,14 +43,6 @@ public class AdminAction extends ActionSupport {
 
   public void setAdminDao(AdminDao adminDao) {
     this.adminDao = adminDao;
-  }
-
-  public int getId() {
-    return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
   }
 
   public String getUsername() {

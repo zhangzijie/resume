@@ -1,0 +1,105 @@
+body,html,.container {
+    width: 100%;
+    height: 100%;
+    font-family: "Microsoft Yahei",Arial, Helvetica, sans-serif;
+}
+.container {
+    text-align: center;
+    color: #f8f8f8;
+    background: url(../../img/intro-bg.jpg) no-repeat center center;
+    background-size: cover;
+}
+.container:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -.25em;
+}
+.center {
+    min-height: 510px;
+    display: inline-block;
+    vertical-align: middle;
+    white-space: normal;
+}
+
+.header {
+    height:50px;
+    position:relative;
+    font-family:"Microsoft Yahei";
+}
+.header .switch {
+    height:45px;
+    position:absolute;
+    left:90px;
+    bottom:0;
+    font-size:18px;
+}
+.header .switch #switch_signin {
+    margin-right:35px;
+}
+.header .switch .switch_btn {
+    color: #CCC;
+    display:inline-block;
+    height:40px;
+    line-height:40px;
+    outline:none;
+    *hide-focus:expression(this.hideFocus=true);
+}
+.header .switch .switch_btn_focus {
+    color:#FFF;
+    display:inline-block;
+    height:40px;
+    line-height:40px;
+    outline:none;
+    text-decoration:none;
+    *hide-focus:expression(this.hideFocus=true);
+}
+.header .switch .switch_btn:hover {
+    text-decoration:none;
+}
+.header .switch .switch_btn_focus:hover {
+    text-decoration:none;
+}
+#switch_bottom {
+    position:absolute;
+    border-bottom:2px solid #FFF;
+}
+
+.form {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+.form .radiogroup {
+    margin-bottom: 10px;
+    font-weight: normal;
+}
+.form .radiogroup span {
+    margin:0 10px 0 10px;
+}
+.form .radiogroup input {
+    margin-right: 3px;
+}
+.form .form-control {
+    position: relative;
+    height: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
+}
+.form .form-control:focus {
+    z-index: 2;
+}
+.form input[type="username"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.form input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
