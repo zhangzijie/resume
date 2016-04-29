@@ -35,9 +35,21 @@
         <form class="form" id="form_signup" action="signup" method="post" style="display:none;">
           <input type="text" class="form-control" name="username" placeholder="用户名" required autofocus>
           <input type="password" class="form-control" name="password" placeholder="密码" required>
+          <div id="jobseeker-info">
+            <input type="text" class="form-control" name="fullname" placeholder="真实姓名">
+            <input type="text" class="form-control" name="phonej" placeholder="联系电话">
+            <input type="text" class="form-control" name="emailj" placeholder="电子邮箱">
+          </div>
+          <div id="company-info">
+            <input type="text" class="form-control" name="companyname" placeholder="公司名">
+            <input type="text" class="form-control" name="linkman" placeholder="联系人姓名">
+            <input type="text" class="form-control" name="phonec" placeholder="联系电话">
+            <input type="text" class="form-control" name="emailc" placeholder="电子邮箱">
+            <input type="text" class="form-control" name="address" placeholder="地址">
+          </div>
           <div class="radiogroup">
-            <span><input type="radio" name="role" value="jobseeker">求职者</span>
-            <span><input type="radio" name="role" value="company">招聘单位</span>
+            <span><input type="radio" name="role" value="jobseeker" id="jobseeker-radio" required>求职者</span>
+            <span><input type="radio" name="role" value="company" id="company-radio" required>招聘单位</span>
           </div>
           <button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
         </form>

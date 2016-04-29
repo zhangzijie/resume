@@ -103,3 +103,7 @@ body,html,.container {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
+
+#jobseeker-info, #company-info {
+    display: none;
+}

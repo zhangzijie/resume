@@ -50,11 +50,8 @@
         <aop:advisor advice-ref="txAdvice" pointcut-ref="alladdmethod"/>
     </aop:config>
     
-    <bean id="AdminAction" class="com.zhangzj.resume.action.AdminAction">
-        <property name="adminDao" ref="adminDao"></property>
-    </bean>
-    <bean id="adminDao" class="com.zhangzj.resume.dao.impl.AdminDaoImpl">
-        <property name="sessionFactory" ref="sessionFactory"></property>
-    </bean>
-    
+    <import resource="action-beans.xml"/>
+    <import resource="service-beans.xml"/>
+    <import resource="dao-beans.xml"/>
+
 </beans>

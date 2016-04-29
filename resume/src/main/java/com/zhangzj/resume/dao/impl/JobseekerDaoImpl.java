@@ -22,6 +22,11 @@ public class JobseekerDaoImpl extends BaseDao<Jobseeker> implements JobseekerDao
   public void deleteJobseeker(Jobseeker jobseeker) {
     this.delete(this.findJobseekerByName(jobseeker));
   }
+  
+  @Override
+  public Jobseeker findJobseekerByID(Jobseeker jobseeker) {
+    return this.findById(Jobseeker.class, jobseeker.getId());
+  }
 
   @Override
   public Jobseeker findJobseekerByName(Jobseeker jobseeker) {
@@ -42,5 +47,5 @@ public class JobseekerDaoImpl extends BaseDao<Jobseeker> implements JobseekerDao
   public List<Jobseeker> findAll() {
     return this.findAll(Jobseeker.class);
   }
-
+  
 }

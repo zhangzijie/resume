@@ -8,5 +8,9 @@
             <result name="success">success.jsp</result>
             <result name="error">error.jsp</result>
         </action>
+        <action name="signup" class="SignupAction" method="signup">
+            <result name="success">success.jsp</result>
+            <result name="error">error.jsp</result>
+        </action>
     </package>
 </struts>

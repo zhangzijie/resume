@@ -15,9 +15,13 @@ $(function(){
         $('#form_login').css('display','none');
         $('#form_signup').css('display','block');
     });
-    if(getParam("a")=='0')
-    {
-        $('#switch_signup').trigger('click');
-    }
 
+    $('#jobseeker-radio').click(function() {
+        $('#company-info').css('display','none');
+        $('#jobseeker-info').css('display','block');
+    });
+    $('#company-radio').click(function() {
+        $('#jobseeker-info').css('display','none');
+        $('#company-info').css('display','block');
+    });
 });
