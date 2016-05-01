@@ -59,7 +59,7 @@
                             <th>简历名称</th>
                             <th>修改</th>
                             <th>预览</th>
-                            <th>复制</th>
+                            <th>删除</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -68,7 +68,14 @@
                             <td>XXX个人简历</td>
                             <td><span class="glyphicon glyphicon-pencil" aria-hidden="true" style="margin-left: 5px;"></span></td>
                             <td><span class="glyphicon glyphicon-eye-open" aria-hidden="true" style="margin-left: 5px;"></span></td>
-                            <td><span class="glyphicon glyphicon-paste" aria-hidden="true" style="margin-left: 5px;"></span></td>
+                            <td><a href="#" id="1" class="deleteButton" data-toggle="modal" data-target="#deleteDialog"><span class="glyphicon glyphicon-remove" aria-hidden="true" style="margin-left: 5px;"></span></a></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>XXX个人简历2</td>
+                            <td><span class="glyphicon glyphicon-pencil" aria-hidden="true" style="margin-left: 5px;"></span></td>
+                            <td><span class="glyphicon glyphicon-eye-open" aria-hidden="true" style="margin-left: 5px;"></span></td>
+                            <td><a href="#" id="2" class="deleteButton" data-toggle="modal" data-target="#deleteDialog"><span class="glyphicon glyphicon-remove" aria-hidden="true" style="margin-left: 5px;"></span></a></td>
                         </tr>
                         </tbody>
                     </table>
@@ -78,8 +85,34 @@
     </div>
 </div>
 
+<div class="modal fade" id="deleteDialog" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">确认删除</h4>
+            </div>
+            <div class="modal-body">
+                <p>确定删除这份简历？</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <a type="button" class="btn btn-danger" id="confirmdelete">删除</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="../../js/jquery.js"></script>
 <script src="../../js/bootstrap.js"></script>
-<script src="../../js/jobseeker/resumeList.js"></script>
+<script>
+    $(function(){
+        $('.deleteButton').click(function(){
+        	/*$(this).attr('id') 根据id判断刚点击的是哪个按钮*/
+            var deleteaction = 'deleteResume.action?id='+$(this).attr('id');
+            $('#confirmdelete').attr('href',deleteaction);
+        });
+    });
+</script>
 </body>
 </html>

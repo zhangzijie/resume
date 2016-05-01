@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.zhangzj.resume.dao.BaseDao;
 import com.zhangzj.resume.dao.ResumeDao;
+import com.zhangzj.resume.entity.Jobseeker;
 import com.zhangzj.resume.entity.Resume;
 
 public class ResumeDaoImpl extends BaseDao<Resume> implements ResumeDao {
@@ -26,6 +27,11 @@ public class ResumeDaoImpl extends BaseDao<Resume> implements ResumeDao {
   @Override
   public Resume findResumeById(Resume resume) {
     return this.findById(Resume.class, resume.getId());
+  }
+
+  @Override
+  public List<Resume> findResumeByJobseeker(Jobseeker jobseeker) {
+    return this.findByProperty(Resume.class, "jobseeker", jobseeker);
   }
 
   @Override

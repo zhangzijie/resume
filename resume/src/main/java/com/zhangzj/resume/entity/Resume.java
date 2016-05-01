@@ -11,6 +11,7 @@ public class Resume {
   private String email;
   private String workyear;
   private String city;
+  private String jobintension;
   private String studystartdate;
   private String studyenddate;
   private String school;
@@ -21,6 +22,7 @@ public class Resume {
   private String company;
   private String jobname;
   private String workdesc;
+  private String skill;
   private String englishlevel;
   private String otherlang;
   private String certificate;
@@ -29,7 +31,7 @@ public class Resume {
   private String photo;
   private String resumedoc;
   private Jobseeker jobseeker;
-  
+
   public int getId() {
     return id;
   }
@@ -110,6 +112,14 @@ public class Resume {
     this.city = city;
   }
 
+  public String getJobintension() {
+    return jobintension;
+  }
+
+  public void setJobintension(String jobintension) {
+    this.jobintension = jobintension;
+  }
+
   public String getStudystartdate() {
     return studystartdate;
   }
@@ -188,6 +198,14 @@ public class Resume {
 
   public void setWorkdesc(String workdesc) {
     this.workdesc = workdesc;
+  }
+
+  public String getSkill() {
+    return skill;
+  }
+
+  public void setSkill(String skill) {
+    this.skill = skill;
   }
 
   public String getEnglishlevel() {

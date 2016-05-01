@@ -2,6 +2,7 @@ package com.zhangzj.resume.dao;
 
 import java.util.List;
 
+import com.zhangzj.resume.entity.Jobseeker;
 import com.zhangzj.resume.entity.Resume;
 
 public interface ResumeDao {
@@ -9,5 +10,6 @@ public interface ResumeDao {
   public void updateResume(Resume resume);
   public void deleteResume(Resume resume);
   public Resume findResumeById(Resume resume);
+  public List<Resume> findResumeByJobseeker(Jobseeker jobseeker);
   public List<Resume> findAll();
 }

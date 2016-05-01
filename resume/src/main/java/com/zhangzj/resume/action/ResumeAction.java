@@ -1,5 +1,7 @@
 package com.zhangzj.resume.action;
 
+import org.apache.struts2.ServletActionContext;
+
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.zhangzj.resume.entity.Jobseeker;
@@ -9,6 +11,7 @@ import com.zhangzj.resume.service.ResumeService;
 @SuppressWarnings("serial")
 public class ResumeAction extends ActionSupport {
   private ResumeService resumeService;
+  private int id;
   private String resumename;
   private String fullname;
   private String sex;
@@ -18,6 +21,7 @@ public class ResumeAction extends ActionSupport {
   private String email;
   private String workyear;
   private String city;
+  private String jobintension;
   private String studystartdate;
   private String studyenddate;
   private String school;
@@ -28,6 +32,7 @@ public class ResumeAction extends ActionSupport {
   private String company;
   private String jobname;
   private String workdesc;
+  private String skill;
   private String englishlevel;
   private String otherlang;
   private String certificate;
@@ -46,6 +51,37 @@ public class ResumeAction extends ActionSupport {
       return "editResume";
     } catch (Exception ex) {
       ex.printStackTrace();
+      ServletActionContext.getRequest().setAttribute("msg", "创建简历失败");
+      return ERROR;
+    }
+  }
+  
+  public String editResume() {
+    try {
+      //Jobseeker jobseeker = (Jobseeker) ActionContext.getContext().getApplication().get("jobseeker");
+      Resume resume = new Resume();
+      resume.setId(this.getId());
+      resume = resumeService.findResumeById(resume);
+      ActionContext.getContext().getSession().put("resume", resume);
+      return "editResume";
+    } catch (Exception ex) {
+      ex.printStackTrace();
+      ServletActionContext.getRequest().setAttribute("msg", "编辑简历失败");
+      return ERROR;
+    }
+  }
+  
+  public String viewResume() {
+    try {
+      //Jobseeker jobseeker = (Jobseeker) ActionContext.getContext().getApplication().get("jobseeker");
+      Resume resume = new Resume();
+      resume.setId(this.getId());
+      resume = resumeService.findResumeById(resume);
+      ActionContext.getContext().getSession().put("resume", resume);
+      return "viewResume";
+    } catch (Exception ex) {
+      ex.printStackTrace();
+      ServletActionContext.getRequest().setAttribute("msg", "查看简历失败");
       return ERROR;
     }
   }
@@ -53,7 +89,7 @@ public class ResumeAction extends ActionSupport {
   public String updateResume() {
     Resume resume = (Resume) ActionContext.getContext().getSession().get("resume");
     try {
-      //Jobseeker jobseeker = (Jobseeker) ActionContext.getContext().getApplication().get("jobseeker");
+      Jobseeker jobseeker = (Jobseeker) ActionContext.getContext().getApplication().get("jobseeker");
       resume.setResumename(this.getResumename());
       resume.setFullname(this.getFullname());
       resume.setSex(this.getSex());
@@ -63,6 +99,7 @@ public class ResumeAction extends ActionSupport {
       resume.setEmail(this.getEmail());
       resume.setWorkyear(this.getWorkyear());
       resume.setCity(this.getCity());
+      resume.setJobintension(this.getJobintension());
       resume.setStudystartdate(this.getStudystartdate());
       resume.setStudyenddate(this.getStudyenddate());
       resume.setSchool(this.getSchool());
@@ -73,6 +110,7 @@ public class ResumeAction extends ActionSupport {
       resume.setCompany(this.getCompany());
       resume.setJobname(this.getJobname());
       resume.setWorkdesc(this.getWorkdesc());
+      resume.setSkill(this.getSkill());
       resume.setEnglishlevel(this.getEnglishlevel());
       resume.setOtherlang(this.getOtherlang());
       resume.setCertificate(this.getCertificate());
@@ -81,10 +119,27 @@ public class ResumeAction extends ActionSupport {
       resume.setPhoto(this.getPhoto());
       resume.setResumedoc(this.getResumedoc());
       resumeService.updateResume(resume);
+      ActionContext.getContext().getSession().put("resumeList", resumeService.findResumeByJobseeker(jobseeker));
       return SUCCESS;
     } catch (Exception ex) {
       ex.printStackTrace();
       resumeService.deleteResume(resume);
+      ServletActionContext.getRequest().setAttribute("msg", "保存简历失败");
+      return ERROR;
+    }
+  }
+
+  public String deleteResume() {
+    try {
+      Jobseeker jobseeker = (Jobseeker) ActionContext.getContext().getApplication().get("jobseeker");
+      Resume resume = new Resume();
+      resume.setId(this.getId());
+      resumeService.deleteResume(resume);
+      ActionContext.getContext().getSession().put("resumeList", resumeService.findResumeByJobseeker(jobseeker));
+      return SUCCESS;
+    } catch (Exception ex) {
+      ex.printStackTrace();
+      ServletActionContext.getRequest().setAttribute("msg", "删除简历失败");
       return ERROR;
     }
   }
@@ -95,6 +150,14 @@ public class ResumeAction extends ActionSupport {
 
   public void setResumeService(ResumeService resumeService) {
     this.resumeService = resumeService;
+  }
+
+  public int getId() {
+    return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
   }
 
   public String getResumename() {
@@ -167,6 +230,14 @@ public class ResumeAction extends ActionSupport {
 
   public void setCity(String city) {
     this.city = city;
+  }
+
+  public String getJobintension() {
+    return jobintension;
+  }
+
+  public void setJobintension(String jobintension) {
+    this.jobintension = jobintension;
   }
 
   public String getStudystartdate() {
@@ -247,6 +318,14 @@ public class ResumeAction extends ActionSupport {
 
   public void setWorkdesc(String workdesc) {
     this.workdesc = workdesc;
+  }
+
+  public String getSkill() {
+    return skill;
+  }
+
+  public void setSkill(String skill) {
+    this.skill = skill;
   }
 
   public String getEnglishlevel() {

@@ -34,6 +34,9 @@
         <property name="city" type="java.lang.String">
             <column name="city" length="10"></column>
         </property>
+        <property name="jobintension" type="java.lang.String">
+            <column name="jobintension" length="20"></column>
+        </property>
         <property name="studystartdate" type="java.lang.String">
             <column name="studystartdate" length="20"></column>
         </property>
@@ -64,6 +67,9 @@
         <property name="workdesc" type="java.lang.String">
             <column name="workdesc" length="200"></column>
         </property>
+        <property name="skill" type="java.lang.String">
+            <column name="skill" length="200"></column>
+        </property>
         <property name="englishlevel" type="java.lang.String">
             <column name="englishlevel" length="10"></column>
         </property>
@@ -85,6 +91,6 @@
         <property name="resumedoc" type="java.lang.String">
             <column name="resumedoc" length="100"></column>
         </property>
-        <many-to-one name="jobseeker" column="jobseekerid" class="com.zhangzj.resume.entity.Jobseeker" not-null="true" />
+        <many-to-one name="jobseeker" column="jobseekerid" class="com.zhangzj.resume.entity.Jobseeker"/>
     </class>
 </hibernate-mapping>

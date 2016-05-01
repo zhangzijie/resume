@@ -21,6 +21,7 @@
         
         <action name="*Resume" class="ResumeAction" method="{1}Resume">
             <result name="editResume">jsp/jobseeker/editResume.jsp</result>
+            <result name="viewResume">jsp/jobseeker/viewResume.jsp</result>
             <result name="success">jsp/jobseeker/resumeList.jsp</result>
             <result name="error">jsp/jobseeker/resumeList.jsp</result>
         </action>

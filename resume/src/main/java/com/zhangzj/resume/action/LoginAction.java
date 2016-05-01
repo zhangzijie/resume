@@ -8,11 +8,13 @@ import com.zhangzj.resume.entity.Company;
 import com.zhangzj.resume.entity.Jobseeker;
 import com.zhangzj.resume.service.CompanyService;
 import com.zhangzj.resume.service.JobseekerService;
+import com.zhangzj.resume.service.ResumeService;
 
 @SuppressWarnings("serial")
 public class LoginAction extends ActionSupport {
   private JobseekerService jobseekerService;
   private CompanyService companyService;
+  private ResumeService resumeService;
   private String username;
   private String password;
   private String role;
@@ -28,8 +30,11 @@ public class LoginAction extends ActionSupport {
         if (null != jobseeker) {
           ActionContext.getContext().getApplication().put("jobseeker", jobseeker);
           //ServletActionContext.getRequest().setAttribute("jobseeker", jobseeker);
+          //获取该求职者的所有简历
+          ActionContext.getContext().getSession().put("resumeList", resumeService.findResumeByJobseeker(jobseeker));
           return "jobseeker";
         } else {
+          ServletActionContext.getRequest().setAttribute("msg", "登录失败，请输入正确的登录信息！");
           return INPUT;
         }
       } else if ("company".equals(role)){
@@ -65,6 +70,14 @@ public class LoginAction extends ActionSupport {
 
   public void setCompanyService(CompanyService companyService) {
     this.companyService = companyService;
+  }
+
+  public ResumeService getResumeService() {
+    return resumeService;
+  }
+
+  public void setResumeService(ResumeService resumeService) {
+    this.resumeService = resumeService;
   }
 
   public String getUsername() {

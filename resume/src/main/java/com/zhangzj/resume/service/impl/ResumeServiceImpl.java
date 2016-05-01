@@ -3,6 +3,7 @@ package com.zhangzj.resume.service.impl;
 import java.util.List;
 
 import com.zhangzj.resume.dao.ResumeDao;
+import com.zhangzj.resume.entity.Jobseeker;
 import com.zhangzj.resume.entity.Resume;
 import com.zhangzj.resume.service.ResumeService;
 
@@ -27,6 +28,11 @@ public class ResumeServiceImpl implements ResumeService {
   @Override
   public Resume findResumeById(Resume resume) {
     return resumeDao.findResumeById(resume);
+  }
+
+  @Override
+  public List<Resume> findResumeByJobseeker(Jobseeker jobseeker) {
+    return resumeDao.findResumeByJobseeker(jobseeker);
   }
 
   @Override

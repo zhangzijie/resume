@@ -3,6 +3,7 @@
 <head>
     <%@ page language="java" contentType="text/html; charset=UTF-8"
 	   pageEncoding="UTF-8"%>
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -59,18 +60,28 @@
                             <th>编号</th>
                             <th>简历名称</th>
                             <th>修改</th>
-                            <th>预览</th>
-                            <th>复制</th>
+                            <th>查看</th>
+                            <th>删除</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>XXX个人简历</td>
-                            <td><span class="glyphicon glyphicon-pencil" aria-hidden="true" style="margin-left: 5px;"></span></td>
-                            <td><span class="glyphicon glyphicon-eye-open" aria-hidden="true" style="margin-left: 5px;"></span></td>
-                            <td><span class="glyphicon glyphicon-paste" aria-hidden="true" style="margin-left: 5px;"></span></td>
-                        </tr>
+                        <c:if test="${null == resumeList || null == resumeList[0]}">
+                            <tr>
+                                <td></td>
+                                <td>你还没有创建过简历！</td>
+                            </tr>
+                        </c:if>
+                        <c:if test="${null != resumeList}">
+                            <c:forEach var="resumeitem" items="${resumeList}" varStatus="status">
+                                <tr>
+                                    <td>${status.index+1}</td>
+                                    <td>${resumeitem.resumename}</td>
+                                    <td><a href="editResume.action?id=${resumeitem.id}"><span class="glyphicon glyphicon-pencil" aria-hidden="true" style="margin-left: 5px;"></span></a></td>
+                                    <td><a href="viewResume.action?id=${resumeitem.id}" target="_blank"><span class="glyphicon glyphicon-eye-open" aria-hidden="true" style="margin-left: 5px;"></span></a></td>
+                                    <td><a href="#" id="${pageContext.request.contextPath}/deleteResume.action?id=${resumeitem.id}" class="deleteButton" data-toggle="modal" data-target="#deleteDialog"><span class="glyphicon glyphicon-remove" aria-hidden="true" style="margin-left: 5px;"></span></a></td>
+                                </tr>
+                            </c:forEach>
+                        </c:if>
                         </tbody>
                     </table>
                 </div>
@@ -79,9 +90,34 @@
     </div>
 </div>
 
+<div class="modal fade" id="deleteDialog" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">确认删除</h4>
+            </div>
+            <div class="modal-body">
+                <p>确定删除这份简历？</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <a type="button" class="btn btn-danger" id="confirmdelete">删除</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
-<script src="${pageContext.request.contextPath}/js/jobseeker/resumeList.js"></script>
-
+<script>
+    $(function(){
+        $('.deleteButton').click(function(){
+        	/*$(this).attr('id') 根据id判断刚点击的是哪个按钮*/
+            var deleteaction = $(this).attr('id');
+            $('#confirmdelete').attr('href',deleteaction);
+        });
+    });
+</script>
 </body>
 </html>

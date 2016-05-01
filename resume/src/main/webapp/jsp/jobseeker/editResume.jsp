@@ -3,10 +3,11 @@
 <head>
 	<%@ page language="java" contentType="text/html; charset=UTF-8"
 	    pageEncoding="UTF-8"%>
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>简历管理</title>
+    <title>编辑简历</title>
     <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/js/My97DatePicker/skin/WdatePicker.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/jobseeker/style.css" rel="stylesheet">
@@ -61,7 +62,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">简历名称</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="resumename" name="resumename" required>
+                            <input type="text" class="form-control" id="resumename" name="resumename" value="${resume.resumename}" required>
                         </div>
                     </div>
 
@@ -69,47 +70,67 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">姓名</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="fullname" name="fullname" required>
+                            <input type="text" class="form-control" id="fullname" name="fullname" value="${resume.fullname}" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">性别</label>
                         <div class="col-sm-5">
                             <select class="form-control" id="sex" name="sex" required>
+                            <c:if test="${null == resume.sex}">
                                 <option>请选择</option>
                                 <option>男</option>
                                 <option>女</option>
+                            </c:if>
+                            <c:if test="${null != resume.sex}">
+                                <c:if test="${resume.sex eq '男'}">
+                                <option>请选择</option>
+                                <option selected="selected">男</option>
+                                <option>女</option>
+                                </c:if>
+                                <c:if test="${resume.sex eq '女'}">
+                                <option>请选择</option>
+                                <option>男</option>
+                                <option selected="selected">女</option>
+                                </c:if>
+                                <c:if test="${resume.sex eq '请选择'}">
+                                <option selected="selected">请选择</option>
+                                <option>男</option>
+                                <option>女</option>
+                                </c:if>
+                            </c:if>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">出生日期</label>
                         <div class="col-sm-5">
-                            <input class="form-control" type="text" id="birthday" name="birthday" onclick="WdatePicker({dateFmt:'yyyy年MM月dd日'})" required>
+                            <input class="form-control" type="text" id="birthday" name="birthday" onclick="WdatePicker({dateFmt:'yyyy年MM月dd日'})" value="${resume.birthday}" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">身份证号</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="idnumber" name="idnumber" required>
+                            <input type="text" class="form-control" id="idnumber" name="idnumber" value="${resume.idnumber}" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">手机号码</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="phone" name="phone" required>
+                            <input type="text" class="form-control" id="phone" name="phone" value="${resume.phone}" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">电子邮箱</label>
                         <div class="col-sm-5">
-                            <input type="email" class="form-control" id="email" name="email" required>
+                            <input type="email" class="form-control" id="email" name="email" value="${resume.email}" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">工作年限</label>
                         <div class="col-sm-5">
                             <select class="form-control" id="workyear" name="workyear" required>
+                            <c:if test="${null == resume.workyear}">
                                 <option>请选择</option>
                                 <option>在读学生</option>
                                 <option>应届毕业生</option>
@@ -118,13 +139,102 @@
                                 <option>3-5年</option>
                                 <option>5-10年</option>
                                 <option>10年以上</option>
+                            </c:if>
+                            <c:if test="${null != resume.workyear}">
+                                <c:if test="${resume.workyear eq '请选择'}">
+                                <option selected="selected">请选择</option>
+                                <option>在读学生</option>
+                                <option>应届毕业生</option>
+                                <option>1年</option>
+                                <option>2年</option>
+                                <option>3-5年</option>
+                                <option>5-10年</option>
+                                <option>10年以上</option>
+                                </c:if>
+                                <c:if test="${resume.workyear eq '在读学生'}">
+                                <option>请选择</option>
+                                <option selected="selected">在读学生</option>
+                                <option>应届毕业生</option>
+                                <option>1年</option>
+                                <option>2年</option>
+                                <option>3-5年</option>
+                                <option>5-10年</option>
+                                <option>10年以上</option>
+                                </c:if>
+                                <c:if test="${resume.workyear eq '应届毕业生'}">
+                                <option>请选择</option>
+                                <option>在读学生</option>
+                                <option selected="selected">应届毕业生</option>
+                                <option>1年</option>
+                                <option>2年</option>
+                                <option>3-5年</option>
+                                <option>5-10年</option>
+                                <option>10年以上</option>
+                                </c:if>
+                                <c:if test="${resume.workyear eq '1年'}">
+                                <option>请选择</option>
+                                <option>在读学生</option>
+                                <option>应届毕业生</option>
+                                <option selected="selected">1年</option>
+                                <option>2年</option>
+                                <option>3-5年</option>
+                                <option>5-10年</option>
+                                <option>10年以上</option>
+                                </c:if>
+                                <c:if test="${resume.workyear eq '2年'}">
+                                <option>请选择</option>
+                                <option>在读学生</option>
+                                <option>应届毕业生</option>
+                                <option>1年</option>
+                                <option selected="selected">2年</option>
+                                <option>3-5年</option>
+                                <option>5-10年</option>
+                                <option>10年以上</option>
+                                </c:if>
+                                <c:if test="${resume.workyear eq '3-5年'}">
+                                <option>请选择</option>
+                                <option>在读学生</option>
+                                <option>应届毕业生</option>
+                                <option>1年</option>
+                                <option>2年</option>
+                                <option selected="selected">3-5年</option>
+                                <option>5-10年</option>
+                                <option>10年以上</option>
+                                </c:if>
+                                <c:if test="${resume.workyear eq '5-10年'}">
+                                <option>请选择</option>
+                                <option>在读学生</option>
+                                <option>应届毕业生</option>
+                                <option>1年</option>
+                                <option>2年</option>
+                                <option>3-5年</option>
+                                <option selected="selected">5-10年</option>
+                                <option>10年以上</option>
+                                </c:if>
+                                <c:if test="${resume.workyear eq '10年以上'}">
+                                <option>请选择</option>
+                                <option>在读学生</option>
+                                <option>应届毕业生</option>
+                                <option>1年</option>
+                                <option>2年</option>
+                                <option>3-5年</option>
+                                <option>5-10年</option>
+                                <option selected="selected">10年以上</option>
+                                </c:if>
+                            </c:if>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">居住城市</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="city" name="city" required>
+                            <input type="text" class="form-control" id="city" name="city" value="${resume.city}" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">求职意向</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="jobintension" name="jobintension" value="${resume.jobintension}" required>
                         </div>
                     </div>
 
@@ -132,31 +242,32 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">开始时间</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="studystartdate" name="studystartdate" onclick="WdatePicker({dateFmt:'yyyy年MM月dd日'})">
+                            <input type="text" class="form-control" id="studystartdate" name="studystartdate" onclick="WdatePicker({dateFmt:'yyyy年MM月dd日'})" value="${resume.studystartdate}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">结束时间</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="studyenddate" name="studyenddate" onclick="WdatePicker({dateFmt:'yyyy年MM月dd日'})">
+                            <input type="text" class="form-control" id="studyenddate" name="studyenddate" onclick="WdatePicker({dateFmt:'yyyy年MM月dd日'})" value="${resume.studyenddate}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">学校</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="school" name="school">
+                            <input type="text" class="form-control" id="school" name="school" value="${resume.school}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">专业</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="major" name="major">
+                            <input type="text" class="form-control" id="major" name="major" value="${resume.major}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">学历</label>
                         <div class="col-sm-5">
                             <select class="form-control" id="degree" name="degree">
+                            <c:if test="${null == resume.degree}">
                                 <option>请选择</option>
                                 <option>高中</option>
                                 <option>中专/技校</option>
@@ -164,6 +275,72 @@
                                 <option>本科</option>
                                 <option>硕士</option>
                                 <option>博士</option>
+                            </c:if>
+                            <c:if test="${null != resume.degree}">
+                                <c:if test="${resume.degree eq '请选择'}">
+                                <option selected="selected">请选择</option>
+                                <option>高中</option>
+                                <option>中专/技校</option>
+                                <option>大专</option>
+                                <option>本科</option>
+                                <option>硕士</option>
+                                <option>博士</option>
+                                </c:if>
+                                <c:if test="${resume.degree eq '高中'}">
+                                <option>请选择</option>
+                                <option selected="selected">高中</option>
+                                <option>中专/技校</option>
+                                <option>大专</option>
+                                <option>本科</option>
+                                <option>硕士</option>
+                                <option>博士</option>
+                                </c:if>
+                                <c:if test="${resume.degree eq '中专/技校'}">
+                                <option>请选择</option>
+                                <option>高中</option>
+                                <option selected="selected">中专/技校</option>
+                                <option>大专</option>
+                                <option>本科</option>
+                                <option>硕士</option>
+                                <option>博士</option>
+                                </c:if>
+                                <c:if test="${resume.degree eq '大专'}">
+                                <option>请选择</option>
+                                <option>高中</option>
+                                <option>中专/技校</option>
+                                <option selected="selected">大专</option>
+                                <option>本科</option>
+                                <option>硕士</option>
+                                <option>博士</option>
+                                </c:if>
+                                <c:if test="${resume.degree eq '本科'}">
+                                <option>请选择</option>
+                                <option>高中</option>
+                                <option>中专/技校</option>
+                                <option>大专</option>
+                                <option selected="selected">本科</option>
+                                <option>硕士</option>
+                                <option>博士</option>
+                                </c:if>
+                                <c:if test="${resume.degree eq '硕士'}">
+                                <option>请选择</option>
+                                <option>高中</option>
+                                <option>中专/技校</option>
+                                <option>大专</option>
+                                <option>本科</option>
+                                <option selected="selected">硕士</option>
+                                <option>博士</option>
+                                </c:if>
+                                <c:if test="${resume.degree eq '博士'}">
+                                <option>请选择</option>
+                                <option>高中</option>
+                                <option>中专/技校</option>
+                                <option>大专</option>
+                                <option>本科</option>
+                                <option>硕士</option>
+                                <option selected="selected">博士</option>
+                                </c:if>
+                            </c:if>
                             </select>
                         </div>
                     </div>
@@ -182,64 +359,122 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">开始时间</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="workstartdate" name="workstartdate" onclick="WdatePicker({dateFmt:'yyyy年MM月dd日'})">
+                            <input type="text" class="form-control" id="workstartdate" name="workstartdate" onclick="WdatePicker({dateFmt:'yyyy年MM月dd日'})" value="${resume.workstartdate}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">结束时间</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="workenddate" name="workenddate" onclick="WdatePicker({dateFmt:'yyyy年MM月dd日'})">
+                            <input type="text" class="form-control" id="workenddate" name="workenddate" onclick="WdatePicker({dateFmt:'yyyy年MM月dd日'})" value="${resume.workenddate}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">公司</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="company" name="company">
+                            <input type="text" class="form-control" id="company" name="company" value="${resume.company}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">职位名称</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="jobname" name="jobname">
+                            <input type="text" class="form-control" id="jobname" name="jobname" value="${resume.jobname}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">工作描述</label>
                         <div class="col-sm-5">
-                            <textarea rows="3" cols="20" class="form-control" id="workdesc" name="workdesc"></textarea>
+                            <textarea rows="3" cols="20" class="form-control" id="workdesc" name="workdesc">${resume.workdesc}</textarea>
                         </div>
                     </div>
 
                     <legend><a name="skillaward"></a>技能/奖励</legend>
                     <div class="form-group">
+                        <label class="col-sm-2 control-label">专业技能</label>
+                        <div class="col-sm-5">
+                            <textarea rows="3" cols="20" class="form-control" id="skill" name="skill">${resume.skill}</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="col-sm-2 control-label">英语等级</label>
                         <div class="col-sm-5">
                             <select class="form-control" id="englishlevel" name="englishlevel">
+                            <c:if test="${null == resume.englishlevel}">
                                 <option>请选择</option>
                                 <option>无</option>
                                 <option>英语四级</option>
                                 <option>英语六级</option>
                                 <option>专业四级</option>
                                 <option>专业八级</option>
+                            </c:if>
+                            <c:if test="${null != resume.englishlevel}">
+                                <c:if test="${resume.englishlevel eq '请选择'}">
+                                <option selected="selected">请选择</option>
+                                <option>无</option>
+                                <option>英语四级</option>
+                                <option>英语六级</option>
+                                <option>专业四级</option>
+                                <option>专业八级</option>
+                                </c:if>
+                                <c:if test="${resume.englishlevel eq '无'}">
+                                <option>请选择</option>
+                                <option selected="selected">无</option>
+                                <option>英语四级</option>
+                                <option>英语六级</option>
+                                <option>专业四级</option>
+                                <option>专业八级</option>
+                                </c:if>
+                                <c:if test="${resume.englishlevel eq '英语四级'}">
+                                <option>请选择</option>
+                                <option>无</option>
+                                <option selected="selected">英语四级</option>
+                                <option>英语六级</option>
+                                <option>专业四级</option>
+                                <option>专业八级</option>
+                                </c:if>
+                                <c:if test="${resume.englishlevel eq '英语六级'}">
+                                <option>请选择</option>
+                                <option>无</option>
+                                <option selected="selected">英语四级</option>
+                                <option>英语六级</option>
+                                <option>专业四级</option>
+                                <option>专业八级</option>
+                                </c:if>
+                                <c:if test="${resume.englishlevel eq '专业四级'}">
+                                <option>请选择</option>
+                                <option>无</option>
+                                <option>英语四级</option>
+                                <option>英语六级</option>
+                                <option selected="selected">专业四级</option>
+                                <option>专业八级</option>
+                                </c:if>
+                                <c:if test="${resume.englishlevel eq '专业八级'}">
+                                <option>请选择</option>
+                                <option>无</option>
+                                <option>英语四级</option>
+                                <option>英语六级</option>
+                                <option>专业四级</option>
+                                <option selected="selected">专业八级</option>
+                                </c:if>
+                            </c:if>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">其他语言能力</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="otherlang" name="otherlang">
+                            <input type="text" class="form-control" id="otherlang" name="otherlang" value="${resume.otherlang}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">专业资格证书</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="certificate" name="certificate">
+                            <input type="text" class="form-control" id="certificate" name="certificate" value="${resume.certificate}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">受到奖励</label>
                         <div class="col-sm-5">
-                            <textarea rows="3" cols="20" class="form-control" id="awards" name="awards"></textarea>
+                            <textarea rows="3" cols="20" class="form-control" id="awards" name="awards">${resume.awards}</textarea>
                         </div>
                     </div>
 
@@ -247,7 +482,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">自我评价</label>
                         <div class="col-sm-5">
-                            <textarea rows="3" cols="20" class="form-control" id="evaluation" name="evaluation"></textarea>
+                            <textarea rows="3" cols="20" class="form-control" id="evaluation" name="evaluation">${resume.evaluation}</textarea>
                         </div>
                     </div>
 
@@ -255,13 +490,13 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">照片</label>
                         <div class="col-sm-5">
-                            <input type="file" id="photo" name="photo">
+                            <input type="file" id="photo" name="photo" value="${resume.photo}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">简历附件</label>
                         <div class="col-sm-5">
-                            <input type="file" id="resumedoc" name="resumedoc">
+                            <input type="file" id="resumedoc" name="resumedoc" value="${resume.resumedoc}">
                         </div>
                     </div>
 
@@ -279,7 +514,6 @@
 <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
 <script src="${pageContext.request.contextPath}/js/My97DatePicker/WdatePicker.js"></script>
-<script src="${pageContext.request.contextPath}/js/jobseeker/editResume.js"></script>
 
 </body>
 </html>
