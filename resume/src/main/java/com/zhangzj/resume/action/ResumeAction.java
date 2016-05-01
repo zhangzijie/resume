@@ -1,0 +1,308 @@
+package com.zhangzj.resume.action;
+
+import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
+import com.zhangzj.resume.entity.Jobseeker;
+import com.zhangzj.resume.entity.Resume;
+import com.zhangzj.resume.service.ResumeService;
+
+@SuppressWarnings("serial")
+public class ResumeAction extends ActionSupport {
+  private ResumeService resumeService;
+  private String resumename;
+  private String fullname;
+  private String sex;
+  private String birthday;
+  private String idnumber;
+  private String phone;
+  private String email;
+  private String workyear;
+  private String city;
+  private String studystartdate;
+  private String studyenddate;
+  private String school;
+  private String major;
+  private String degree;
+  private String workstartdate;
+  private String workenddate;
+  private String company;
+  private String jobname;
+  private String workdesc;
+  private String englishlevel;
+  private String otherlang;
+  private String certificate;
+  private String awards;
+  private String evaluation;
+  private String photo;
+  private String resumedoc;
+  
+  public String addResume() {
+    try {
+      Jobseeker jobseeker = (Jobseeker) ActionContext.getContext().getApplication().get("jobseeker");
+      Resume resume = new Resume();
+      resume.setJobseeker(jobseeker);
+      resumeService.addResume(resume);
+      ActionContext.getContext().getSession().put("resume", resume);
+      return "editResume";
+    } catch (Exception ex) {
+      ex.printStackTrace();
+      return ERROR;
+    }
+  }
+  
+  public String updateResume() {
+    Resume resume = (Resume) ActionContext.getContext().getSession().get("resume");
+    try {
+      //Jobseeker jobseeker = (Jobseeker) ActionContext.getContext().getApplication().get("jobseeker");
+      resume.setResumename(this.getResumename());
+      resume.setFullname(this.getFullname());
+      resume.setSex(this.getSex());
+      resume.setBirthday(this.getBirthday());
+      resume.setIdnumber(this.getIdnumber());
+      resume.setPhone(this.getPhone());
+      resume.setEmail(this.getEmail());
+      resume.setWorkyear(this.getWorkyear());
+      resume.setCity(this.getCity());
+      resume.setStudystartdate(this.getStudystartdate());
+      resume.setStudyenddate(this.getStudyenddate());
+      resume.setSchool(this.getSchool());
+      resume.setMajor(this.getMajor());
+      resume.setDegree(this.getDegree());
+      resume.setWorkstartdate(this.getWorkstartdate());
+      resume.setWorkenddate(this.getWorkenddate());
+      resume.setCompany(this.getCompany());
+      resume.setJobname(this.getJobname());
+      resume.setWorkdesc(this.getWorkdesc());
+      resume.setEnglishlevel(this.getEnglishlevel());
+      resume.setOtherlang(this.getOtherlang());
+      resume.setCertificate(this.getCertificate());
+      resume.setAwards(this.getAwards());
+      resume.setEvaluation(this.getEvaluation());
+      resume.setPhoto(this.getPhoto());
+      resume.setResumedoc(this.getResumedoc());
+      resumeService.updateResume(resume);
+      return SUCCESS;
+    } catch (Exception ex) {
+      ex.printStackTrace();
+      resumeService.deleteResume(resume);
+      return ERROR;
+    }
+  }
+
+  public ResumeService getResumeService() {
+    return resumeService;
+  }
+
+  public void setResumeService(ResumeService resumeService) {
+    this.resumeService = resumeService;
+  }
+
+  public String getResumename() {
+    return resumename;
+  }
+
+  public void setResumename(String resumename) {
+    this.resumename = resumename;
+  }
+
+  public String getFullname() {
+    return fullname;
+  }
+
+  public void setFullname(String fullname) {
+    this.fullname = fullname;
+  }
+
+  public String getSex() {
+    return sex;
+  }
+
+  public void setSex(String sex) {
+    this.sex = sex;
+  }
+
+  public String getBirthday() {
+    return birthday;
+  }
+
+  public void setBirthday(String birthday) {
+    this.birthday = birthday;
+  }
+
+  public String getIdnumber() {
+    return idnumber;
+  }
+
+  public void setIdnumber(String idnumber) {
+    this.idnumber = idnumber;
+  }
+
+  public String getPhone() {
+    return phone;
+  }
+
+  public void setPhone(String phone) {
+    this.phone = phone;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public String getWorkyear() {
+    return workyear;
+  }
+
+  public void setWorkyear(String workyear) {
+    this.workyear = workyear;
+  }
+
+  public String getCity() {
+    return city;
+  }
+
+  public void setCity(String city) {
+    this.city = city;
+  }
+
+  public String getStudystartdate() {
+    return studystartdate;
+  }
+
+  public void setStudystartdate(String studystartdate) {
+    this.studystartdate = studystartdate;
+  }
+
+  public String getStudyenddate() {
+    return studyenddate;
+  }
+
+  public void setStudyenddate(String studyenddate) {
+    this.studyenddate = studyenddate;
+  }
+
+  public String getSchool() {
+    return school;
+  }
+
+  public void setSchool(String school) {
+    this.school = school;
+  }
+
+  public String getMajor() {
+    return major;
+  }
+
+  public void setMajor(String major) {
+    this.major = major;
+  }
+
+  public String getDegree() {
+    return degree;
+  }
+
+  public void setDegree(String degree) {
+    this.degree = degree;
+  }
+
+  public String getWorkstartdate() {
+    return workstartdate;
+  }
+
+  public void setWorkstartdate(String workstartdate) {
+    this.workstartdate = workstartdate;
+  }
+
+  public String getWorkenddate() {
+    return workenddate;
+  }
+
+  public void setWorkenddate(String workenddate) {
+    this.workenddate = workenddate;
+  }
+
+  public String getCompany() {
+    return company;
+  }
+
+  public void setCompany(String company) {
+    this.company = company;
+  }
+
+  public String getJobname() {
+    return jobname;
+  }
+
+  public void setJobname(String jobname) {
+    this.jobname = jobname;
+  }
+
+  public String getWorkdesc() {
+    return workdesc;
+  }
+
+  public void setWorkdesc(String workdesc) {
+    this.workdesc = workdesc;
+  }
+
+  public String getEnglishlevel() {
+    return englishlevel;
+  }
+
+  public void setEnglishlevel(String englishlevel) {
+    this.englishlevel = englishlevel;
+  }
+
+  public String getOtherlang() {
+    return otherlang;
+  }
+
+  public void setOtherlang(String otherlang) {
+    this.otherlang = otherlang;
+  }
+
+  public String getCertificate() {
+    return certificate;
+  }
+
+  public void setCertificate(String certificate) {
+    this.certificate = certificate;
+  }
+
+  public String getAwards() {
+    return awards;
+  }
+
+  public void setAwards(String awards) {
+    this.awards = awards;
+  }
+
+  public String getEvaluation() {
+    return evaluation;
+  }
+
+  public void setEvaluation(String evaluation) {
+    this.evaluation = evaluation;
+  }
+
+  public String getPhoto() {
+    return photo;
+  }
+
+  public void setPhoto(String photo) {
+    this.photo = photo;
+  }
+
+  public String getResumedoc() {
+    return resumedoc;
+  }
+
+  public void setResumedoc(String resumedoc) {
+    this.resumedoc = resumedoc;
+  }
+  
+}

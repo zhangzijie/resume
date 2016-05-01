@@ -4,4 +4,5 @@ import com.zhangzj.resume.entity.Company;
 
 public interface CompanyService {
   public void signup(Company company);
+  public Company login(Company company);
 }

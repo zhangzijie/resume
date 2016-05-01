@@ -1,5 +1,7 @@
 package com.zhangzj.resume.entity;
 
+import java.util.Set;
+
 public class Jobseeker {
   private int id;
   private String username;
@@ -7,6 +9,7 @@ public class Jobseeker {
   private String fullname;
   private String phone;
   private String email;
+  private Set<Resume> resumeSet;
   
   public int getId() {
     return id;
@@ -55,6 +58,13 @@ public class Jobseeker {
   public void setEmail(String email) {
     this.email = email;
   }
-  
+
+  public Set<Resume> getResumeSet() {
+    return resumeSet;
+  }
+
+  public void setResumeSet(Set<Resume> resumeSet) {
+    this.resumeSet = resumeSet;
+  }
   
 }

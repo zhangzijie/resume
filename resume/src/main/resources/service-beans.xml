@@ -9,5 +9,8 @@
     <bean id="companyService" class="com.zhangzj.resume.service.impl.CompanyServiceImpl">
         <property name="companyDao" ref="companyDao"></property>
     </bean>
+    <bean id="resumeService" class="com.zhangzj.resume.service.impl.ResumeServiceImpl">
+        <property name="resumeDao" ref="resumeDao"></property>
+    </bean>
     
 </beans>

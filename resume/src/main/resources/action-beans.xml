@@ -10,5 +10,12 @@
         <property name="jobseekerService" ref="jobseekerService"></property>
         <property name="companyService" ref="companyService"></property>
     </bean>
+    <bean id="LoginAction" class="com.zhangzj.resume.action.LoginAction">
+        <property name="jobseekerService" ref="jobseekerService"></property>
+        <property name="companyService" ref="companyService"></property>
+    </bean>
     
+    <bean id="ResumeAction" class="com.zhangzj.resume.action.ResumeAction">
+        <property name="resumeService" ref="resumeService"></property>
+    </bean>
 </beans>

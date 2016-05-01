@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.zhangzj.resume.entity.Resume" table="resume">
+        <id name="id" type="int">
+            <column name="id" length="10"></column>
+            <generator class="increment"></generator>
+        </id>
+        <property name="resumename" type="java.lang.String">
+            <column name="resumename" length="20"></column>
+        </property>
+        <property name="fullname" type="java.lang.String">
+            <column name="fullname" length="20"></column>
+        </property>
+        <property name="sex" type="java.lang.String">
+            <column name="sex" length="4"></column>
+        </property>
+        <property name="birthday" type="java.lang.String">
+            <column name="birthday" length="20"></column>
+        </property>
+        <property name="idnumber" type="java.lang.String">
+            <column name="idnumber" length="20"></column>
+        </property>
+        <property name="phone" type="java.lang.String">
+            <column name="phone" length="15"></column>
+        </property>
+        <property name="email" type="java.lang.String">
+            <column name="email" length="30"></column>
+        </property>
+        <property name="workyear" type="java.lang.String">
+            <column name="workyear" length="15"></column>
+        </property>
+        <property name="city" type="java.lang.String">
+            <column name="city" length="10"></column>
+        </property>
+        <property name="studystartdate" type="java.lang.String">
+            <column name="studystartdate" length="20"></column>
+        </property>
+        <property name="studyenddate" type="java.lang.String">
+            <column name="studyenddate" length="20"></column>
+        </property>
+        <property name="school" type="java.lang.String">
+            <column name="school" length="20"></column>
+        </property>
+        <property name="major" type="java.lang.String">
+            <column name="major" length="20"></column>
+        </property>
+        <property name="degree" type="java.lang.String">
+            <column name="degree" length="10"></column>
+        </property>
+        <property name="workstartdate" type="java.lang.String">
+            <column name="workstartdate" length="20"></column>
+        </property>
+        <property name="workenddate" type="java.lang.String">
+            <column name="workenddate" length="20"></column>
+        </property>
+        <property name="company" type="java.lang.String">
+            <column name="company" length="30"></column>
+        </property>
+        <property name="jobname" type="java.lang.String">
+            <column name="jobname" length="20"></column>
+        </property>
+        <property name="workdesc" type="java.lang.String">
+            <column name="workdesc" length="200"></column>
+        </property>
+        <property name="englishlevel" type="java.lang.String">
+            <column name="englishlevel" length="10"></column>
+        </property>
+        <property name="otherlang" type="java.lang.String">
+            <column name="otherlang" length="20"></column>
+        </property>
+        <property name="certificate" type="java.lang.String">
+            <column name="certificate" length="20"></column>
+        </property>
+        <property name="awards" type="java.lang.String">
+            <column name="awards" length="200"></column>
+        </property>
+        <property name="evaluation" type="java.lang.String">
+            <column name="evaluation" length="200"></column>
+        </property>
+        <property name="photo" type="java.lang.String">
+            <column name="photo" length="100"></column>
+        </property>
+        <property name="resumedoc" type="java.lang.String">
+            <column name="resumedoc" length="100"></column>
+        </property>
+        <many-to-one name="jobseeker" column="jobseekerid" class="com.zhangzj.resume.entity.Jobseeker" not-null="true" />
+    </class>
+</hibernate-mapping>

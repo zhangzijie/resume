@@ -14,6 +14,17 @@ public class CompanyServiceImpl implements CompanyService {
     companyDao.addCompany(company);
   }
 
+  @Override
+  public Company login(Company company) {
+    String password = MakeMD5.makeMD5(company.getPassword());
+    company = companyDao.findCompanyByName(company);
+    if (company.getPassword().equals(password)) {
+      return company;
+    } else {
+      return null;
+    }
+  }
+
   public CompanyDao getCompanyDao() {
     return companyDao;
   }

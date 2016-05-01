@@ -1,5 +1,8 @@
 package com.zhangzj.resume.action;
 
+import org.apache.struts2.ServletActionContext;
+
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.zhangzj.resume.entity.Company;
 import com.zhangzj.resume.entity.Jobseeker;
@@ -33,7 +36,8 @@ public class SignupAction extends ActionSupport {
         jobseeker.setPhone(this.getPhonej());
         jobseeker.setEmail(this.getEmailj());
         jobseekerService.signup(jobseeker);
-        //TODO
+        ActionContext.getContext().getApplication().put("jobseeker", jobseeker);
+        return "jobseeker";
       } else if ("company".equals(role)){
         Company company = new Company();
         company.setUsername(this.getUsername());
@@ -44,13 +48,14 @@ public class SignupAction extends ActionSupport {
         company.setEmail(this.getEmailc());
         company.setAddress(this.getAddress());
         companyService.signup(company);
-        //TODO
+        ActionContext.getContext().getApplication().put("company", company);
+        return "company";
       }
     } catch (Exception ex) {
       ex.printStackTrace();
-      return ERROR;
+      return INPUT;
     }
-    return SUCCESS;
+    return INPUT;
   }
 
   public JobseekerService getJobseekerService() {

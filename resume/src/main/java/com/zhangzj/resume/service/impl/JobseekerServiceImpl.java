@@ -14,6 +14,17 @@ public class JobseekerServiceImpl implements JobseekerService {
     jobseekerDao.addJobseeker(jobseeker);
   }
 
+  @Override
+  public Jobseeker login(Jobseeker jobseeker) {
+    String password = MakeMD5.makeMD5(jobseeker.getPassword());
+    jobseeker = jobseekerDao.findJobseekerByName(jobseeker);
+    if (jobseeker.getPassword().equals(password)) {
+      return jobseeker;
+    } else {
+      return null;
+    }
+  }
+
   public JobseekerDao getJobseekerDao() {
     return jobseekerDao;
   }
