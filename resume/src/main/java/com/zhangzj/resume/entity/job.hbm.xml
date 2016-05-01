@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.zhangzj.resume.entity.Job" table="job">
+        <id name="id" type="int">
+            <column name="id" length="10"></column>
+            <generator class="increment"></generator>
+        </id>
+        <property name="jobname" type="java.lang.String">
+            <column name="jobname" length="20"></column>
+        </property>
+        <property name="salary" type="java.lang.String">
+            <column name="salary" length="20"></column>
+        </property>
+        <property name="number" type="java.lang.String">
+            <column name="number" length="10"></column>
+        </property>
+        <property name="address" type="java.lang.String">
+            <column name="address" length="50"></column>
+        </property>
+        <property name="workyear" type="java.lang.String">
+            <column name="workyear" length="15"></column>
+        </property>
+        <property name="degree" type="java.lang.String">
+            <column name="degree" length="10"></column>
+        </property>
+        <property name="responsibility" type="java.lang.String">
+            <column name="responsibility" length="200"></column>
+        </property>
+        <property name="requirement" type="java.lang.String">
+            <column name="requirement" length="200"></column>
+        </property>
+        <property name="category" type="java.lang.String">
+            <column name="category" length="15"></column>
+        </property>
+        <many-to-one name="company" column="companyid" class="com.zhangzj.resume.entity.Company"/>
+    </class>
+</hibernate-mapping>

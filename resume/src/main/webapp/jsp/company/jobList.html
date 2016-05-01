@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>简历管理</title>
+    <title>职位管理</title>
     <link href="../../css/bootstrap.css" rel="stylesheet">
-    <link href="../../css/jobseeker/style.css" rel="stylesheet">
-    <link href="../../css/jobseeker/resumeList.css" rel="stylesheet">
+    <link href="../../css/company/style.css" rel="stylesheet">
+    <link href="../../css/company/jobList.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="../../js/html5shiv.min.js"></script>
     <script src="../../js/respond.min.js"></script>
@@ -40,23 +40,22 @@
         <div class="row">
             <div class="col-sm-3 col-md-2">
                 <ul class="nav nav-sidebar" style="margin-top: 20px;">
-                    <li class="active"><a href="#">简历管理</a></li>
-                    <li><a href="#">职位搜索</a></li>
-                    <li><a href="#">最新招聘</a></li>
+                    <li class="active"><a href="#">职位管理</a></li>
+                    <li><a href="#">简历搜索</a></li>
+                    <li><a href="#">最新简历</a></li>
                 </ul>
                 <ul class="nav nav-sidebar">
-                    <li><a href=""><span class="glyphicon glyphicon-file" aria-hidden="true" style="margin: 0 5px;"></span>增加简历</a></li>
-                    <li><a href=""><span class="glyphicon glyphicon-file" aria-hidden="true" style="margin: 0 5px;"></span>test</a></li>
+                    <li><a href=""><span class="glyphicon glyphicon-file" aria-hidden="true" style="margin: 0 5px;"></span>增加职位</a></li>
                 </ul>
             </div>
             <div class="col-sm-9 col-md-10">
-                <h3 class="sub-header">我的简历</h3>
+                <h3 class="sub-header">我的招聘职位</h3>
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
                         <tr>
                             <th>编号</th>
-                            <th>简历名称</th>
+                            <th>职位名称</th>
                             <th>修改</th>
                             <th>查看</th>
                             <th>删除</th>
@@ -65,14 +64,14 @@
                         <tbody>
                         <tr>
                             <td>1</td>
-                            <td>XXX个人简历</td>
+                            <td>XXX岗</td>
                             <td><span class="glyphicon glyphicon-pencil" aria-hidden="true" style="margin-left: 5px;"></span></td>
                             <td><span class="glyphicon glyphicon-eye-open" aria-hidden="true" style="margin-left: 5px;"></span></td>
                             <td><a href="#" id="1" class="deleteButton" data-toggle="modal" data-target="#deleteDialog"><span class="glyphicon glyphicon-remove" aria-hidden="true" style="margin-left: 5px;"></span></a></td>
                         </tr>
                         <tr>
                             <td>2</td>
-                            <td>XXX个人简历2</td>
+                            <td>YYY岗</td>
                             <td><span class="glyphicon glyphicon-pencil" aria-hidden="true" style="margin-left: 5px;"></span></td>
                             <td><span class="glyphicon glyphicon-eye-open" aria-hidden="true" style="margin-left: 5px;"></span></td>
                             <td><a href="#" id="2" class="deleteButton" data-toggle="modal" data-target="#deleteDialog"><span class="glyphicon glyphicon-remove" aria-hidden="true" style="margin-left: 5px;"></span></a></td>
@@ -93,7 +92,7 @@
                 <h4 class="modal-title">确认删除</h4>
             </div>
             <div class="modal-body">
-                <p>确定删除这份简历？</p>
+                <p>确定删除这个职位？</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
@@ -108,8 +107,8 @@
 <script>
     $(function(){
         $('.deleteButton').click(function(){
-        	/*$(this).attr('id') 根据id判断刚点击的是哪个按钮*/
-            var deleteaction = 'deleteResume.action?id='+$(this).attr('id');
+            /*$(this).attr('id') 根据id判断刚点击的是哪个按钮*/
+            var deleteaction = 'deleteJob.action?id='+$(this).attr('id');
             $('#confirmdelete').attr('href',deleteaction);
         });
     });

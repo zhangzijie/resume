@@ -68,7 +68,7 @@
                                 </h3>
                                 <dl class="experience-description timeline-content">
                                     <dt class="experience-position">职位：${resume.jobname}</dt>
-                                    <dd class="contentarea">工作描述：${resume.workdesc}</dd>
+                                    <dd class="contentarea" id="workdesc">工作描述：${resume.workdesc}</dd>
                                 </dl>
                             </li>
                         </ul>
@@ -84,11 +84,11 @@
                                 <h3 class="timeline-title"></h3>
                                 <dl class=" timeline-content">
                                     <dt class="experience-position"></dt>
-                                    <dd class="experience-task">专业技能：${resume.skill}</dd>
+                                    <dd class="experience-task" id="skill">专业技能：<br>${resume.skill}</dd>
                                     <dd class="experience-task">英语等级：${resume.englishlevel}</dd>
                                     <dd class="experience-task">其他语言能力：${resume.otherlang}</dd>
                                     <dd class="experience-task">专业资格证书：${resume.certificate}</dd>
-                                    <dd class="education-honor">受到奖励：${resume.awards}</dd>
+                                    <dd class="education-honor" id="awards">受到奖励：<br>${resume.awards}</dd>
                                 </dl>
                             </li>
                         </ul>
@@ -103,7 +103,7 @@
                                 <h3 class="timeline-title"></h3>
                                 <dl class=" timeline-content">
                                     <dt class="experience-position"></dt>
-                                    <dd class="contentarea">${resume.evaluation}</dd>
+                                    <dd class="contentarea" id="evaluation">${resume.evaluation}</dd>
                                 </dl>
                             </li>
                         </ul>
@@ -117,5 +117,28 @@
 <footer>
     <p></p>
 </footer>
+<script src="${pageContext.request.contextPath}/js/jquery.js"></script>
+<script>
+    $(function(){
+        var element;
+        var str;
+        
+        element = $('#workdesc');
+        str =  element.text().replace(/\n/g,'<br/>');
+        element.html(str);
+        
+        element = $('#skill');
+        str =  element.text().replace(/\n/g,'<br/>');
+        element.html(str);
+
+        element = $('#awards');
+        str =  element.text().replace(/\n/g,'<br/>');
+        element.html(str);
+        
+        element = $('#evaluation');
+        str =  element.text().replace(/\n/g,'<br/>');
+        element.html(str);
+    });
+</script>
 </body>
 </html>

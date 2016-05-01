@@ -82,11 +82,13 @@
                                 <h3 class="timeline-title"></h3>
                                 <dl class=" timeline-content">
                                     <dt class="experience-position"></dt>
-                                    <dd class="experience-task">专业技能：</dd>
+                                    <dd class="experience-task" id="skill">专业技能：1.xxx
+                                    2.bbb
+                                    3.asfasf</dd>
                                     <dd class="experience-task">英语等级：</dd>
                                     <dd class="experience-task">其他语言能力：</dd>
                                     <dd class="experience-task">专业资格证书：</dd>
-                                    <dd class="education-honor">收到奖励：</dd>
+                                    <dd class="education-honor" id="awards">收到奖励：</dd>
                                 </dl>
                             </li>
                         </ul>
@@ -115,5 +117,20 @@
 <footer>
     <p></p>
 </footer>
+<script src="../../js/jquery.js"></script>
+<script>
+    $(function(){
+        var element;
+        var str;
+
+        element = $('#skill');
+        str =  element.text().replace(/\n/g,'<br/>');
+        element.html(str);
+
+        element = $('#awards');
+        str =  element.text().replace(/\n/g,'<br/>');
+        element.html(str);
+    });
+</script>
 </body>
 </html>

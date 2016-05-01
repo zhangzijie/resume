@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <%@ page language="java" contentType="text/html; charset=UTF-8"
-	   pageEncoding="UTF-8"%>
-	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
+	    pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>简历管理</title>
+    <title>职位管理</title>
     <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/css/jobseeker/style.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/css/jobseeker/resumeList.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/company/style.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/company/jobList.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="${pageContext.request.contextPath}/js/html5shiv.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/respond.min.js"></script>
     <![endif]-->
 </head>
 <body>
-
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -28,7 +27,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-home" aria-hidden="true" style="margin-right: 5px;"></span>求职简历管理系统</a>
-            <a class="navbar-brand" href="#" id="showname" style="margin-left: 50px;"><span class="glyphicon glyphicon-user" aria-hidden="true" style="margin-right: 5px;"></span>${jobseeker.fullname}，您好！</a>
+            <a class="navbar-brand" href="#" id="showname" style="margin-left: 50px;"><span class="glyphicon glyphicon-user" aria-hidden="true" style="margin-right: 5px;"></span>${company,companyname}，您好！</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -43,42 +42,42 @@
         <div class="row">
             <div class="col-sm-3 col-md-2">
                 <ul class="nav nav-sidebar" style="margin-top: 20px;">
-                    <li class="active"><a href="#">简历管理</a></li>
-                    <li><a href="#">职位搜索</a></li>
-                    <li><a href="#">最新招聘</a></li>
+                    <li class="active"><a href="#">职位管理</a></li>
+                    <li><a href="#">简历搜索</a></li>
+                    <li><a href="#">最新简历</a></li>
                 </ul>
                 <ul class="nav nav-sidebar">
-                    <li><a href="${pageContext.request.contextPath}/addResume.action"><span class="glyphicon glyphicon-file" aria-hidden="true" style="margin: 0 5px;"></span>增加简历</a></li>
+                    <li><a href="${pageContext.request.contextPath}/addJob.action"><span class="glyphicon glyphicon-file" aria-hidden="true" style="margin: 0 5px;"></span>增加职位</a></li>
                 </ul>
             </div>
             <div class="col-sm-9 col-md-10">
-                <h3 class="sub-header">我的简历</h3>
+                <h3 class="sub-header">我的招聘职位</h3>
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
                         <tr>
                             <th>编号</th>
-                            <th>简历名称</th>
+                            <th>职位名称</th>
                             <th>修改</th>
                             <th>查看</th>
                             <th>删除</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:if test="${null == resumeList || null == resumeList[0]}">
+                        <c:if test="${null == jobList || null == jobList[0]}">
                             <tr>
                                 <td></td>
                                 <td>你还没有创建过简历！</td>
                             </tr>
                         </c:if>
-                        <c:if test="${null != resumeList}">
-                            <c:forEach var="resumeitem" items="${resumeList}" varStatus="status">
+                        <c:if test="${null != jobList}">
+                            <c:forEach var="jobitem" items="${jobList}" varStatus="status">
                                 <tr>
                                     <td>${status.index+1}</td>
-                                    <td>${resumeitem.resumename}</td>
-                                    <td><a href="editResume.action?id=${resumeitem.id}"><span class="glyphicon glyphicon-pencil" aria-hidden="true" style="margin-left: 5px;"></span></a></td>
-                                    <td><a href="viewResume.action?id=${resumeitem.id}" target="_blank"><span class="glyphicon glyphicon-eye-open" aria-hidden="true" style="margin-left: 5px;"></span></a></td>
-                                    <td><a href="#" id="${pageContext.request.contextPath}/deleteResume.action?id=${resumeitem.id}" class="deleteButton" data-toggle="modal" data-target="#deleteDialog"><span class="glyphicon glyphicon-remove" aria-hidden="true" style="margin-left: 5px;"></span></a></td>
+                                    <td>${jobitem.jobname}</td>
+                                    <td><a href="editResume.action?id=${jobitem.id}"><span class="glyphicon glyphicon-pencil" aria-hidden="true" style="margin-left: 5px;"></span></a></td>
+                                    <td><a href="viewResume.action?id=${jobitem.id}" target="_blank"><span class="glyphicon glyphicon-eye-open" aria-hidden="true" style="margin-left: 5px;"></span></a></td>
+                                    <td><a href="#" id="${pageContext.request.contextPath}/deleteResume.action?id=${jobitem.id}" class="deleteButton" data-toggle="modal" data-target="#deleteDialog"><span class="glyphicon glyphicon-remove" aria-hidden="true" style="margin-left: 5px;"></span></a></td>
                                 </tr>
                             </c:forEach>
                         </c:if>
@@ -98,7 +97,7 @@
                 <h4 class="modal-title">确认删除</h4>
             </div>
             <div class="modal-body">
-                <p>确定删除这份简历？</p>
+                <p>确定删除这个职位？</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
@@ -113,8 +112,8 @@
 <script>
     $(function(){
         $('.deleteButton').click(function(){
-        	/*$(this).attr('id') 根据id判断刚点击的是哪个按钮*/
-            var deleteaction = $(this).attr('id');
+            /*$(this).attr('id') 根据id判断刚点击的是哪个按钮*/
+            var deleteaction = 'deleteJob.action?id='+$(this).attr('id');
             $('#confirmdelete').attr('href',deleteaction);
         });
     });
