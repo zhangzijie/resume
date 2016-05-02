@@ -7,6 +7,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.zhangzj.resume.entity.Company;
 import com.zhangzj.resume.entity.Jobseeker;
 import com.zhangzj.resume.service.CompanyService;
+import com.zhangzj.resume.service.JobService;
 import com.zhangzj.resume.service.JobseekerService;
 import com.zhangzj.resume.service.ResumeService;
 
@@ -15,6 +16,7 @@ public class LoginAction extends ActionSupport {
   private JobseekerService jobseekerService;
   private CompanyService companyService;
   private ResumeService resumeService;
+  private JobService jobService;
   private String username;
   private String password;
   private String role;
@@ -44,6 +46,7 @@ public class LoginAction extends ActionSupport {
         company = companyService.login(company);
         if (null != company) {
           ActionContext.getContext().getApplication().put("company", company);
+          ActionContext.getContext().getSession().put("jobList", jobService.findJobByCompany(company));
           return "company";
         } else {
           return INPUT;
@@ -78,6 +81,14 @@ public class LoginAction extends ActionSupport {
 
   public void setResumeService(ResumeService resumeService) {
     this.resumeService = resumeService;
+  }
+
+  public JobService getJobService() {
+    return jobService;
+  }
+
+  public void setJobService(JobService jobService) {
+    this.jobService = jobService;
   }
 
   public String getUsername() {

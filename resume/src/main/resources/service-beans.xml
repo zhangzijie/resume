@@ -12,5 +12,8 @@
     <bean id="resumeService" class="com.zhangzj.resume.service.impl.ResumeServiceImpl">
         <property name="resumeDao" ref="resumeDao"></property>
     </bean>
+    <bean id="jobService" class="com.zhangzj.resume.service.impl.JobServiceImpl">
+        <property name="jobDao" ref="jobDao"></property>
+    </bean>
     
 </beans>

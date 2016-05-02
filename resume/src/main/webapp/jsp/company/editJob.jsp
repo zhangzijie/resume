@@ -11,7 +11,6 @@
     <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/js/My97DatePicker/skin/WdatePicker.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/company/style.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/css/company/jobList.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="${pageContext.request.contextPath}/js/html5shiv.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/respond.min.js"></script>
@@ -29,7 +28,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-home" aria-hidden="true" style="margin-right: 5px;"></span>求职简历管理系统</a>
-            <a class="navbar-brand" href="#" id="showname" style="margin-left: 50px;"><span class="glyphicon glyphicon-user" aria-hidden="true" style="margin-right: 5px;"></span>${company,companyname}，您好！</a>
+            <a class="navbar-brand" href="#" id="showname" style="margin-left: 50px;"><span class="glyphicon glyphicon-user" aria-hidden="true" style="margin-right: 5px;"></span>${company.companyname}，您好！</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -44,7 +43,7 @@
         <div class="row">
             <div class="col-sm-3 col-md-2">
                 <ul class="nav nav-sidebar" style="margin-top: 20px;">
-                    <li class="active"><a href="#">职位管理</a></li>
+                    <li class="active"><a href="listJob.action">职位管理</a></li>
                     <li><a href="#">简历搜索</a></li>
                     <li><a href="#">最新简历</a></li>
                 </ul>
@@ -55,7 +54,8 @@
             </div>
             <div class="col-sm-9 col-md-10">
                 <form class="form-horizontal" id="job-form" action="updateJob" method="post">
-                    <legend><a name="jobinfo"></a>职位信息<span style="color: red;">*</span></legend>
+                    <a name="jobinfo"></a>
+                    <legend>职位信息<span style="color: red;">*</span></legend>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">职位名称</label>
                         <div class="col-sm-5">
@@ -83,7 +83,6 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">工作经验</label>
                         <div class="col-sm-5">
-                            <div class="col-sm-5">
                             <select class="form-control" id="workyear" name="workyear" required>
                             <c:if test="${null == job.workyear}">
                                 <option>请选择</option>
@@ -160,7 +159,6 @@
                                 </c:if>
                             </c:if>
                             </select>
-                        </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -244,8 +242,15 @@
                             </select>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">职能类别</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="category" name="category" value="${job.category}">
+                        </div>
+                    </div>
 
-                    <legend><a name="description"></a>职位描述<span style="color: red;">*</span></legend>
+                    <a name="description"></a>
+                    <legend>职位描述<span style="color: red;">*</span></legend>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">岗位职责</label>
                         <div class="col-sm-5">
@@ -258,13 +263,6 @@
                             <textarea rows="5" cols="30" class="form-control" id="requirement" name="requirement">${job.requirement}</textarea>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">职能类别</label>
-                        <div class="col-sm-5">
-                            <input type="text" class="form-control" id="category" name="category" value="${job.category}">
-                        </div>
-                    </div>
-                    
                     
                     <div class="form-group" style="padding-top: 15px;">
                         <div class="col-sm-offset-2 col-sm-3">

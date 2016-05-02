@@ -10,6 +10,9 @@
         <property name="jobname" type="java.lang.String">
             <column name="jobname" length="20"></column>
         </property>
+        <property name="credate" type="java.lang.String">
+            <column name="credate" length="20"></column>
+        </property>
         <property name="salary" type="java.lang.String">
             <column name="salary" length="20"></column>
         </property>
@@ -33,6 +36,9 @@
         </property>
         <property name="category" type="java.lang.String">
             <column name="category" length="15"></column>
+        </property>
+        <property name="companyname" type="java.lang.String">
+            <column name="companyname" length="30"></column>
         </property>
         <many-to-one name="company" column="companyid" class="com.zhangzj.resume.entity.Company"/>
     </class>

@@ -3,6 +3,7 @@ package com.zhangzj.resume.entity;
 public class Job {
   private int id;
   private String jobname;
+  private String credate;
   private String salary;
   private String number;
   private String address;
@@ -11,8 +12,9 @@ public class Job {
   private String responsibility;
   private String requirement;
   private String category;
+  private String companyname;
   private Company company;
-
+  
   public int getId() {
     return id;
   }
@@ -27,6 +29,14 @@ public class Job {
 
   public void setJobname(String jobname) {
     this.jobname = jobname;
+  }
+
+  public String getCredate() {
+    return credate;
+  }
+
+  public void setCredate(String credate) {
+    this.credate = credate;
   }
 
   public String getSalary() {
@@ -99,6 +109,14 @@ public class Job {
 
   public void setCompany(Company company) {
     this.company = company;
+  }
+
+  public String getCompanyname() {
+    return companyname;
+  }
+
+  public void setCompanyname(String companyname) {
+    this.companyname = companyname;
   }
   
 }

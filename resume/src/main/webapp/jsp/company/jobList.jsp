@@ -27,7 +27,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-home" aria-hidden="true" style="margin-right: 5px;"></span>求职简历管理系统</a>
-            <a class="navbar-brand" href="#" id="showname" style="margin-left: 50px;"><span class="glyphicon glyphicon-user" aria-hidden="true" style="margin-right: 5px;"></span>${company,companyname}，您好！</a>
+            <a class="navbar-brand" href="#" id="showname" style="margin-left: 50px;"><span class="glyphicon glyphicon-user" aria-hidden="true" style="margin-right: 5px;"></span>${company.companyname}，您好！</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -42,12 +42,12 @@
         <div class="row">
             <div class="col-sm-3 col-md-2">
                 <ul class="nav nav-sidebar" style="margin-top: 20px;">
-                    <li class="active"><a href="#">职位管理</a></li>
+                    <li class="active"><a href="listJob.action">职位管理</a></li>
                     <li><a href="#">简历搜索</a></li>
                     <li><a href="#">最新简历</a></li>
                 </ul>
                 <ul class="nav nav-sidebar">
-                    <li><a href="${pageContext.request.contextPath}/addJob.action"><span class="glyphicon glyphicon-file" aria-hidden="true" style="margin: 0 5px;"></span>增加职位</a></li>
+                    <li><a href="addJob.action"><span class="glyphicon glyphicon-file" aria-hidden="true" style="margin: 0 5px;"></span>增加职位</a></li>
                 </ul>
             </div>
             <div class="col-sm-9 col-md-10">
@@ -67,7 +67,7 @@
                         <c:if test="${null == jobList || null == jobList[0]}">
                             <tr>
                                 <td></td>
-                                <td>你还没有创建过简历！</td>
+                                <td>你还没有创建过职位！</td>
                             </tr>
                         </c:if>
                         <c:if test="${null != jobList}">
@@ -75,9 +75,9 @@
                                 <tr>
                                     <td>${status.index+1}</td>
                                     <td>${jobitem.jobname}</td>
-                                    <td><a href="editResume.action?id=${jobitem.id}"><span class="glyphicon glyphicon-pencil" aria-hidden="true" style="margin-left: 5px;"></span></a></td>
-                                    <td><a href="viewResume.action?id=${jobitem.id}" target="_blank"><span class="glyphicon glyphicon-eye-open" aria-hidden="true" style="margin-left: 5px;"></span></a></td>
-                                    <td><a href="#" id="${pageContext.request.contextPath}/deleteResume.action?id=${jobitem.id}" class="deleteButton" data-toggle="modal" data-target="#deleteDialog"><span class="glyphicon glyphicon-remove" aria-hidden="true" style="margin-left: 5px;"></span></a></td>
+                                    <td><a href="editJob.action?id=${jobitem.id}"><span class="glyphicon glyphicon-pencil" aria-hidden="true" style="margin-left: 5px;"></span></a></td>
+                                    <td><a href="viewJob.action?id=${jobitem.id}" target="_blank"><span class="glyphicon glyphicon-eye-open" aria-hidden="true" style="margin-left: 5px;"></span></a></td>
+                                    <td><a href="#" id="deleteJob.action?id=${jobitem.id}" class="deleteButton" data-toggle="modal" data-target="#deleteDialog"><span class="glyphicon glyphicon-remove" aria-hidden="true" style="margin-left: 5px;"></span></a></td>
                                 </tr>
                             </c:forEach>
                         </c:if>
@@ -113,7 +113,7 @@
     $(function(){
         $('.deleteButton').click(function(){
             /*$(this).attr('id') 根据id判断刚点击的是哪个按钮*/
-            var deleteaction = 'deleteJob.action?id='+$(this).attr('id');
+            var deleteaction = $(this).attr('id');
             $('#confirmdelete').attr('href',deleteaction);
         });
     });

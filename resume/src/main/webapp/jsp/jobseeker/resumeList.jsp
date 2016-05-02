@@ -43,12 +43,12 @@
         <div class="row">
             <div class="col-sm-3 col-md-2">
                 <ul class="nav nav-sidebar" style="margin-top: 20px;">
-                    <li class="active"><a href="#">简历管理</a></li>
+                    <li class="active"><a href="listResume.action">简历管理</a></li>
                     <li><a href="#">职位搜索</a></li>
                     <li><a href="#">最新招聘</a></li>
                 </ul>
                 <ul class="nav nav-sidebar">
-                    <li><a href="${pageContext.request.contextPath}/addResume.action"><span class="glyphicon glyphicon-file" aria-hidden="true" style="margin: 0 5px;"></span>增加简历</a></li>
+                    <li><a href="addResume.action"><span class="glyphicon glyphicon-file" aria-hidden="true" style="margin: 0 5px;"></span>增加简历</a></li>
                 </ul>
             </div>
             <div class="col-sm-9 col-md-10">
@@ -78,7 +78,7 @@
                                     <td>${resumeitem.resumename}</td>
                                     <td><a href="editResume.action?id=${resumeitem.id}"><span class="glyphicon glyphicon-pencil" aria-hidden="true" style="margin-left: 5px;"></span></a></td>
                                     <td><a href="viewResume.action?id=${resumeitem.id}" target="_blank"><span class="glyphicon glyphicon-eye-open" aria-hidden="true" style="margin-left: 5px;"></span></a></td>
-                                    <td><a href="#" id="${pageContext.request.contextPath}/deleteResume.action?id=${resumeitem.id}" class="deleteButton" data-toggle="modal" data-target="#deleteDialog"><span class="glyphicon glyphicon-remove" aria-hidden="true" style="margin-left: 5px;"></span></a></td>
+                                    <td><a href="#" id="deleteResume.action?id=${resumeitem.id}" class="deleteButton" data-toggle="modal" data-target="#deleteDialog"><span class="glyphicon glyphicon-remove" aria-hidden="true" style="margin-left: 5px;"></span></a></td>
                                 </tr>
                             </c:forEach>
                         </c:if>

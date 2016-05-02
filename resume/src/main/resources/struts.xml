@@ -10,7 +10,7 @@
         </action>
         <action name="signup" class="SignupAction" method="signup">
             <result name="jobseeker">jsp/jobseeker/resumeList.jsp</result>
-            <result name="company"></result>
+            <result name="company">jsp/company/jobList.jsp</result>
             <result name="input">index.html</result>
         </action>
         <action name="login" class="LoginAction" method="login">
@@ -25,5 +25,12 @@
             <result name="success">jsp/jobseeker/resumeList.jsp</result>
             <result name="error">jsp/jobseeker/resumeList.jsp</result>
         </action>
+        <action name="*Job" class="JobAction" method="{1}Job">
+            <result name="editJob">jsp/company/editJob.jsp</result>
+            <result name="viewJob">jsp/company/viewJob.jsp</result>
+            <result name="success">jsp/company/jobList.jsp</result>
+            <result name="error">jsp/company/jobList.jsp</result>
+        </action>
+        
     </package>
 </struts>

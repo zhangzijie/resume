@@ -143,6 +143,18 @@ public class ResumeAction extends ActionSupport {
       return ERROR;
     }
   }
+  
+  public String listResume() {
+    try {
+      Jobseeker jobseeker = (Jobseeker) ActionContext.getContext().getApplication().get("jobseeker");
+      ActionContext.getContext().getSession().put("resumeList", resumeService.findResumeByJobseeker(jobseeker));
+      return SUCCESS;
+    } catch (Exception ex) {
+      ex.printStackTrace();
+      ServletActionContext.getRequest().setAttribute("msg", "列出简历失败");
+      return ERROR;
+    }
+  }
 
   public ResumeService getResumeService() {
     return resumeService;

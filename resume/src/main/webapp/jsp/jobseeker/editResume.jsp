@@ -44,7 +44,7 @@
         <div class="row">
             <div class="col-sm-3 col-md-2">
                 <ul class="nav nav-sidebar" style="margin-top: 20px;">
-                    <li class="active"><a href="#">简历管理</a></li>
+                    <li class="active"><a href="listResume.action">简历管理</a></li>
                     <li><a href="#">职位搜索</a></li>
                     <li><a href="#">最新招聘</a></li>
                 </ul>

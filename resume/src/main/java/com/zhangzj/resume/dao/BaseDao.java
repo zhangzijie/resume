@@ -7,6 +7,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
@@ -81,6 +82,20 @@ public class BaseDao<T> extends HibernateDaoSupport {
   public List<T> findByExample(T entity) {
     try {
       return this.getHibernateTemplate().findByExample(entity);
+    } catch (RuntimeException e) {
+      throw e;
+    }
+  }
+  
+  /**
+   * 模糊查询指定条件对象集合
+   * @param criteria
+   * @return
+   */
+  public List<T> findByCriteria(DetachedCriteria criteria){
+    try {
+      this.getHibernateTemplate().findByCriteria(criteria);
+      return null;
     } catch (RuntimeException e) {
       throw e;
     }
