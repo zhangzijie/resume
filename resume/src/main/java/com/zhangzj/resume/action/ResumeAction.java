@@ -75,7 +75,11 @@ public class ResumeAction extends ActionSupport {
     try {
       //Jobseeker jobseeker = (Jobseeker) ActionContext.getContext().getApplication().get("jobseeker");
       Resume resume = new Resume();
-      resume.setId(this.getId());
+      if(null != ServletActionContext.getRequest().getAttribute("resumeid")) {
+        resume.setId((int) ServletActionContext.getRequest().getAttribute("resumeid"));
+      } else {
+        resume.setId(this.getId());
+      }
       resume = resumeService.findResumeById(resume);
       ActionContext.getContext().getSession().put("resume", resume);
       return "viewResume";

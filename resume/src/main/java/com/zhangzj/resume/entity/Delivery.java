@@ -1,6 +1,6 @@
 package com.zhangzj.resume.entity;
 
-public class Resumetojob {
+public class Delivery {
   private int id;
   private int jobseekerid;
   private int companyid;
@@ -8,6 +8,8 @@ public class Resumetojob {
   private String jobname;
   private String jobseekername;
   private String companyname;
+  private String credate;
+  private String state;
   private Resume resume;
   private Job job;
   
@@ -81,6 +83,22 @@ public class Resumetojob {
 
   public void setJob(Job job) {
     this.job = job;
+  }
+
+  public String getCredate() {
+    return credate;
+  }
+
+  public void setCredate(String credate) {
+    this.credate = credate;
+  }
+
+  public String getState() {
+    return state;
+  }
+
+  public void setState(String state) {
+    this.state = state;
   }
   
 }

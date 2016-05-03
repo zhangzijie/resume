@@ -15,7 +15,7 @@
     <bean id="jobDao" class="com.zhangzj.resume.dao.impl.JobDaoImpl">
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
-    <bean id="resumetojobDao" class="com.zhangzj.resume.dao.impl.ResumetojobDaoImpl">
+    <bean id="deliveryDao" class="com.zhangzj.resume.dao.impl.DeliveryDaoImpl">
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
     

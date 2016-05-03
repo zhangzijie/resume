@@ -33,7 +33,7 @@ public class Resume {
   private String photo;
   private String resumedoc;
   private Jobseeker jobseeker;
-  private Set<Resumetojob> ResumetojobSet;
+  private Set<Delivery> DeliverySet;
 
   public int getId() {
     return id;
@@ -275,12 +275,12 @@ public class Resume {
     this.jobseeker = jobseeker;
   }
 
-  public Set<Resumetojob> getResumetojobSet() {
-    return ResumetojobSet;
+  public Set<Delivery> getDeliverySet() {
+    return DeliverySet;
   }
 
-  public void setResumetojobSet(Set<Resumetojob> resumetojobSet) {
-    ResumetojobSet = resumetojobSet;
+  public void setDeliverySet(Set<Delivery> deliverySet) {
+    DeliverySet = deliverySet;
   }
   
 }

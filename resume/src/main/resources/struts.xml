@@ -33,7 +33,12 @@
         </action>
         
         <action name="*Delivery" class="DeliveryAction" method="{1}Delivery">
-            <result name="jobseekerSuccess">jsp/jobseeker/resumeList.jsp</result>
+            <result name="jobseekerSuccess">jsp/jobseeker/deliveryList.jsp</result>
+            <result name="companySuccess">jsp/company/deliveryList.jsp</result>
+            <result name="jobseekerError">jsp/jobseeker/resumeList.jsp</result>
+            <result name="companyError">jsp/company/jobList.jsp</result>
+            <result type="chain" name="viewResume">viewResume</result>
+            <result name="error">index.html</result>
         </action>
     </package>
 </struts>

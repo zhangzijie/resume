@@ -22,7 +22,7 @@
     </bean>
     
     <bean id="DeliveryAction" class="com.zhangzj.resume.action.DeliveryAction">
-        <property name="resumetojobService" ref="resumetojobService"></property>
+        <property name="deliveryService" ref="deliveryService"></property>
         <property name="resumeService" ref="resumeService"></property>
         <property name="jobService" ref="jobService"></property>
     </bean>

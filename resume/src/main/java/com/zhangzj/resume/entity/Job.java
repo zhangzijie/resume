@@ -16,7 +16,7 @@ public class Job {
   private String category;
   private String companyname;
   private Company company;
-  private Set<Resumetojob> resumetojobSet;
+  private Set<Delivery> deliverySet;
   
   public int getId() {
     return id;
@@ -122,12 +122,12 @@ public class Job {
     this.companyname = companyname;
   }
 
-  public Set<Resumetojob> getResumetojobSet() {
-    return resumetojobSet;
+  public Set<Delivery> getDeliverySet() {
+    return deliverySet;
   }
 
-  public void setResumetojobSet(Set<Resumetojob> resumetojobSet) {
-    this.resumetojobSet = resumetojobSet;
+  public void setDeliverySet(Set<Delivery> deliverySet) {
+    this.deliverySet = deliverySet;
   }
   
 }

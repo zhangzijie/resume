@@ -92,9 +92,9 @@
             <column name="resumedoc" length="100"></column>
         </property>
         <many-to-one name="jobseeker" column="jobseekerid" class="com.zhangzj.resume.entity.Jobseeker"/>
-        <set name="ResumetojobSet" inverse="true" lazy="true">
+        <set name="DeliverySet" inverse="true" lazy="true">
             <key column="id"/>
-            <one-to-many class="com.zhangzj.resume.entity.Resumetojob"/>
+            <one-to-many class="com.zhangzj.resume.entity.Delivery"/>
         </set>
     </class>
 </hibernate-mapping>

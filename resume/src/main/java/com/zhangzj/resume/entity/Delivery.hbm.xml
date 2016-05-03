@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="com.zhangzj.resume.entity.Resumetojob" table="resumetojob">
+    <class name="com.zhangzj.resume.entity.Delivery" table="delivery">
         <id name="id" type="int">
             <column name="id" length="10"></column>
             <generator class="increment"></generator>
@@ -24,6 +24,12 @@
         </property>
         <property name="companyname" type="java.lang.String">
             <column name="companyname" length="20"></column>
+        </property>
+        <property name="credate" type="java.lang.String">
+            <column name="credate" length="20"></column>
+        </property>
+        <property name="state" type="java.lang.String">
+            <column name="state" length="20"></column>
         </property>
         <many-to-one name="resume" column="resumeid" class="com.zhangzj.resume.entity.Resume"/>
         <many-to-one name="job" column="jobid" class="com.zhangzj.resume.entity.Job"/>

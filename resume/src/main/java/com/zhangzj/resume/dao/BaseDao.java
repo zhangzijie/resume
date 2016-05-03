@@ -33,6 +33,25 @@ public class BaseDao<T> extends HibernateDaoSupport {
   }
   
   /**
+   * 
+   * @param entityClass
+   * @param propertyName
+   * @param value
+   * @param orderByProp
+   * @param orderByValue
+   * @return
+   */
+  @SuppressWarnings("unchecked")
+  public List<T> findByPropertyOrderBy(Class<T> entityClass, String propertyName, Object value, String orderByProp, String orderByValue) {
+    try {
+      String queryStr = "from " + entityClass.getName() + " as model where model." + propertyName + "=? order by " + orderByProp + " " + orderByValue;
+      return (List<T>) this.getHibernateTemplate().find(queryStr, value);
+    } catch (RuntimeException e) {
+      throw e;
+    }
+  }
+  
+  /**
    * 获取所有实体集合
    * @param entityClass
    * @return

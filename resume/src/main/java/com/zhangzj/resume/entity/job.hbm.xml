@@ -41,9 +41,9 @@
             <column name="companyname" length="30"></column>
         </property>
         <many-to-one name="company" column="companyid" class="com.zhangzj.resume.entity.Company"/>
-        <set name="ResumetojobSet" inverse="true" lazy="true">
+        <set name="DeliverySet" inverse="true" lazy="true">
             <key column="id"/>
-            <one-to-many class="com.zhangzj.resume.entity.Resumetojob"/>
+            <one-to-many class="com.zhangzj.resume.entity.Delivery"/>
         </set>
     </class>
 </hibernate-mapping>
