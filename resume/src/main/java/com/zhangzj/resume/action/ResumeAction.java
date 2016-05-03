@@ -123,7 +123,6 @@ public class ResumeAction extends ActionSupport {
       return SUCCESS;
     } catch (Exception ex) {
       ex.printStackTrace();
-      resumeService.deleteResume(resume);
       ServletActionContext.getRequest().setAttribute("msg", "保存简历失败");
       return ERROR;
     }

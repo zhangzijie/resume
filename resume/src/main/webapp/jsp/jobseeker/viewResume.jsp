@@ -84,11 +84,11 @@
                                 <h3 class="timeline-title"></h3>
                                 <dl class=" timeline-content">
                                     <dt class="experience-position"></dt>
-                                    <dd class="experience-task" id="skill">专业技能：<br>${resume.skill}</dd>
+                                    <dd class="experience-task" id="skill">专业技能：<br/>${resume.skill}</dd>
                                     <dd class="experience-task">英语等级：${resume.englishlevel}</dd>
                                     <dd class="experience-task">其他语言能力：${resume.otherlang}</dd>
                                     <dd class="experience-task">专业资格证书：${resume.certificate}</dd>
-                                    <dd class="education-honor" id="awards">受到奖励：<br>${resume.awards}</dd>
+                                    <dd class="education-honor" id="awards">受到奖励：<br/>${resume.awards}</dd>
                                 </dl>
                             </li>
                         </ul>

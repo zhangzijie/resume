@@ -24,6 +24,8 @@ public class LoginAction extends ActionSupport {
   public String login(){
     try{
       String role = this.getRole();
+      ActionContext.getContext().getApplication().remove("company");
+      ActionContext.getContext().getApplication().remove("jobseeker");
       if ("jobseeker".equals(role)) {
         Jobseeker jobseeker = new Jobseeker();
         jobseeker.setUsername(this.getUsername());
@@ -56,6 +58,12 @@ public class LoginAction extends ActionSupport {
       ex.printStackTrace();
       return INPUT;
     }
+    return INPUT;
+  }
+  
+  public String logout() {
+    ActionContext.getContext().getApplication().remove("company");
+    ActionContext.getContext().getApplication().remove("jobseeker");
     return INPUT;
   }
 

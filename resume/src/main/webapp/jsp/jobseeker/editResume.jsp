@@ -34,7 +34,7 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">帮助</a></li>
-                <li><a href="${pageContext.request.contextPath}">退出</a></li>
+                <li><a href="logout.action">退出</a></li>
             </ul>
         </div>
     </div>
@@ -45,8 +45,8 @@
             <div class="col-sm-3 col-md-2">
                 <ul class="nav nav-sidebar" style="margin-top: 20px;">
                     <li class="active"><a href="listResume.action">简历管理</a></li>
-                    <li><a href="#">职位搜索</a></li>
-                    <li><a href="#">最新招聘</a></li>
+                    <li><a href="searchJob.action">职位搜索</a></li>
+                    <li><a href="latestJob.action">最新招聘</a></li>
                 </ul>
                 <ul class="nav nav-sidebar">
                     <li><a href="#baseinfo"><span class="glyphicon glyphicon-user" aria-hidden="true" style="margin: 0 5px;"></span>个人信息</a></li>

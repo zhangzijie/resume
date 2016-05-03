@@ -65,10 +65,10 @@
             <column name="jobname" length="20"></column>
         </property>
         <property name="workdesc" type="java.lang.String">
-            <column name="workdesc" length="200"></column>
+            <column name="workdesc" length="500"></column>
         </property>
         <property name="skill" type="java.lang.String">
-            <column name="skill" length="200"></column>
+            <column name="skill" length="500"></column>
         </property>
         <property name="englishlevel" type="java.lang.String">
             <column name="englishlevel" length="10"></column>
@@ -80,10 +80,10 @@
             <column name="certificate" length="20"></column>
         </property>
         <property name="awards" type="java.lang.String">
-            <column name="awards" length="200"></column>
+            <column name="awards" length="500"></column>
         </property>
         <property name="evaluation" type="java.lang.String">
-            <column name="evaluation" length="200"></column>
+            <column name="evaluation" length="500"></column>
         </property>
         <property name="photo" type="java.lang.String">
             <column name="photo" length="100"></column>
@@ -92,5 +92,9 @@
             <column name="resumedoc" length="100"></column>
         </property>
         <many-to-one name="jobseeker" column="jobseekerid" class="com.zhangzj.resume.entity.Jobseeker"/>
+        <set name="ResumetojobSet" inverse="true" lazy="true">
+            <key column="id"/>
+            <one-to-many class="com.zhangzj.resume.entity.Resumetojob"/>
+        </set>
     </class>
 </hibernate-mapping>

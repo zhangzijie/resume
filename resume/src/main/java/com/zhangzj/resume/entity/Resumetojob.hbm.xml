@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.zhangzj.resume.entity.Resumetojob" table="resumetojob">
+        <id name="id" type="int">
+            <column name="id" length="10"></column>
+            <generator class="increment"></generator>
+        </id>
+        <property name="jobseekerid" type="int">
+            <column name="jobseekerid" length="10"></column>
+        </property>
+        <property name="companyid" type="int">
+            <column name="companyid" length="10"></column>
+        </property>
+        <property name="resumename" type="java.lang.String">
+            <column name="resumename" length="20"></column>
+        </property>
+        <property name="jobname" type="java.lang.String">
+            <column name="jobname" length="20"></column>
+        </property>
+        <property name="jobseekername" type="java.lang.String">
+            <column name="jobseekername" length="20"></column>
+        </property>
+        <property name="companyname" type="java.lang.String">
+            <column name="companyname" length="20"></column>
+        </property>
+        <many-to-one name="resume" column="resumeid" class="com.zhangzj.resume.entity.Resume"/>
+        <many-to-one name="job" column="jobid" class="com.zhangzj.resume.entity.Job"/>
+    </class>
+</hibernate-mapping>

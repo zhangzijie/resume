@@ -2,15 +2,15 @@
 <html lang="zh-CN">
 <head>
     <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+       pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>查看职位</title>
+    <title>简历管理</title>
     <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/css/company/style.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/css/company/viewJob.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/jobseeker/style.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/jobseeker/viewJob.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="${pageContext.request.contextPath}/js/html5shiv.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/respond.min.js"></script>
@@ -28,7 +28,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-home" aria-hidden="true" style="margin-right: 5px;"></span>求职简历管理系统</a>
-            <a class="navbar-brand" href="#" id="showname" style="margin-left: 50px;"><span class="glyphicon glyphicon-user" aria-hidden="true" style="margin-right: 5px;"></span>${company.companyname}，您好！</a>
+            <a class="navbar-brand" href="#" id="showname" style="margin-left: 50px;"><span class="glyphicon glyphicon-user" aria-hidden="true" style="margin-right: 5px;"></span>${jobseeker.fullname}，您好！</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -43,13 +43,12 @@
         <div class="row">
             <div class="col-sm-3 col-md-2">
                 <ul class="nav nav-sidebar" style="margin-top: 20px;">
-                    <li class="active"><a href="listJob.action">职位管理</a></li>
-                    <li><a href="#">简历搜索</a></li>
-                    <li><a href="#">最新简历</a></li>
+                    <li><a href="listResume.action">简历管理</a></li>
+                    <li class="active"><a href="searchJob.action">职位搜索</a></li>
+                    <li><a href="latestJob.action">最新招聘</a></li>
                 </ul>
                 <ul class="nav nav-sidebar">
-                    <li><a href="#jobinfo"><span class="glyphicon glyphicon-user" aria-hidden="true" style="margin: 0 5px;"></span>职位信息</a></li>
-                    <li><a href="#description"><span class="glyphicon glyphicon-book" aria-hidden="true" style="margin: 0 5px;"></span>职位描述</a></li>
+                    <li><a href="addResume.action"><span class="glyphicon glyphicon-file" aria-hidden="true" style="margin: 0 5px;"></span>增加简历</a></li>
                 </ul>
             </div>
             <div class="col-sm-9 col-md-10">
@@ -57,6 +56,9 @@
                     <div class="col-sm-6 col-md-6">
                         <h3>${job.jobname}</h3>
                         <h4>${job.companyname}</h4>
+                    </div>
+                    <div class="col-sm-4 col-md-4">
+                        <a href="#" class="btn btn-warning apply" data-toggle="modal" data-target="#deliverDialog">申请职位</a>
                     </div>
                 </div>
                 <div class="job-main">
@@ -87,6 +89,42 @@
                 </div>
 
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deliverDialog" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">确认投递</h4>
+            </div>
+            <form action="addDelivery" method="post">
+            <div class="modal-body">
+                <p>请选择要投递的简历：</p>
+                <input type="hidden" name="jobid" value="${job.id}">
+                <c:if test="${null != resumeList}">
+	                <select class="form-control" name="resumeid" required>
+	                <c:forEach var="resumeitem" items="${resumeList}">
+	                    <option value="${resumeitem.id}">${resumeitem.resumename}</option>
+	                </c:forEach>
+	                </select>
+                </c:if>
+                <c:if test="${null == resumeList || null == resumeList[0]}">
+                    <p>你还没有简历，请先创建简历！</p>
+                    <script>
+                        $(function(){
+                        	$('#deliver').css("display","none");
+                        });
+                    </script>
+                </c:if>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="submit" class="btn btn-primary" id="deliver">投递</button>
+            </div>
+            </form>
         </div>
     </div>
 </div>

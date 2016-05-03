@@ -4,16 +4,12 @@
     "http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
     <package name="resume" extends="struts-default">
-        <action name="*Admin" class="AdminAction" method="{1}Admin">
-            <result name="success">success.jsp</result>
-            <result name="error">error.jsp</result>
-        </action>
         <action name="signup" class="SignupAction" method="signup">
             <result name="jobseeker">jsp/jobseeker/resumeList.jsp</result>
             <result name="company">jsp/company/jobList.jsp</result>
             <result name="input">index.html</result>
         </action>
-        <action name="login" class="LoginAction" method="login">
+        <action name="log*" class="LoginAction" method="log{1}">
             <result name="jobseeker">jsp/jobseeker/resumeList.jsp</result>
             <result name="company">jsp/company/jobList.jsp</result>
             <result name="input">index.html</result>
@@ -27,10 +23,17 @@
         </action>
         <action name="*Job" class="JobAction" method="{1}Job">
             <result name="editJob">jsp/company/editJob.jsp</result>
-            <result name="viewJob">jsp/company/viewJob.jsp</result>
+            <result name="companyViewJob">jsp/company/viewJob.jsp</result>
+            <result name="jobseekerViewJob">jsp/jobseeker/viewJob.jsp</result>
+            <result name="companyLatestJob"></result>
+            <result name="jobseekerLatestJob">jsp/jobseeker/latestJob.jsp</result>
+            <result name="searchJob">jsp/jobseeker/searchJob.jsp</result>
             <result name="success">jsp/company/jobList.jsp</result>
             <result name="error">jsp/company/jobList.jsp</result>
         </action>
         
+        <action name="*Delivery" class="DeliveryAction" method="{1}Delivery">
+            <result name="jobseekerSuccess">jsp/jobseeker/resumeList.jsp</result>
+        </action>
     </package>
 </struts>

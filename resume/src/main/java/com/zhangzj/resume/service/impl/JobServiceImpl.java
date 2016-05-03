@@ -1,6 +1,7 @@
 package com.zhangzj.resume.service.impl;
 
 import java.util.List;
+import java.util.Properties;
 
 import com.zhangzj.resume.dao.JobDao;
 import com.zhangzj.resume.entity.Company;
@@ -38,6 +39,16 @@ public class JobServiceImpl implements JobService {
   @Override
   public List<Job> findAll() {
     return jobDao.findAll();
+  }
+
+  @Override
+  public List<Job> findLatest() {
+    return jobDao.findLatest();
+  }
+
+  @Override
+  public List<Job> findJobByProperties(Properties prop) {
+    return jobDao.findJobByProperties(prop);
   }
 
   public JobDao getJobDao() {

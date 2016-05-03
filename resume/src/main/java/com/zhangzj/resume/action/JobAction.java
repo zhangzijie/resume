@@ -1,5 +1,8 @@
 package com.zhangzj.resume.action;
 
+import java.util.List;
+import java.util.Properties;
+
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -13,6 +16,8 @@ import com.zhangzj.resume.util.GetNowDate;
 public class JobAction extends ActionSupport {
   private JobService jobService;
   private int id;
+  private String companyid;
+  private String jobseekerid;
   private String jobname;
   private String credate;
   private String salary;
@@ -23,6 +28,8 @@ public class JobAction extends ActionSupport {
   private String responsibility;
   private String requirement;
   private String category;
+  private String companyname;
+  private String pagenum;
   private Company company;
   
   public String addJob() {
@@ -58,12 +65,18 @@ public class JobAction extends ActionSupport {
   
   public String viewJob() {
     try {
-      //Company company = (Company) ActionContext.getContext().getApplication().get("company");
       Job job = new Job();
       job.setId(this.getId());
       job = jobService.findJobById(job);
       ActionContext.getContext().getSession().put("job", job);
-      return "viewJob";
+      if (null != ActionContext.getContext().getApplication().get("company")) {
+        return "companyViewJob";
+      } else if(null != ActionContext.getContext().getApplication().get("jobseeker")) {
+        return "jobseekerViewJob";
+      } else {
+        ServletActionContext.getRequest().setAttribute("msg", "查看职位失败");
+        return ERROR;
+      }
     } catch (Exception ex) {
       ex.printStackTrace();
       ServletActionContext.getRequest().setAttribute("msg", "查看职位失败");
@@ -118,6 +131,45 @@ public class JobAction extends ActionSupport {
     } catch (Exception ex) {
       ex.printStackTrace();
       ServletActionContext.getRequest().setAttribute("msg", "列出职位失败");
+      return ERROR;
+    }
+  }
+  
+  public String latestJob() {
+    try {
+      List<Job> jobList = jobService.findLatest();
+      ActionContext.getContext().getSession().put("jobList",jobList);
+      if (null != ActionContext.getContext().getApplication().get("company")) {
+        return "companyLatestJob";
+      } else if(null != ActionContext.getContext().getApplication().get("jobseeker")) {
+        return "jobseekerLatestJob";
+      } else {
+        ServletActionContext.getRequest().setAttribute("msg", "查看最新职位失败");
+        return ERROR;
+      }
+    } catch (Exception ex) {
+      ex.printStackTrace();
+      ServletActionContext.getRequest().setAttribute("msg", "查看最新职位失败");
+      return ERROR;
+    }
+  }
+  
+  public String searchJob() {
+    try {
+      if(null == this.getJobname() || "".equals(this.getJobname())) {
+        return "searchJob";
+      } else {
+        Properties prop = new Properties();
+        prop.setProperty("jobname", this.getJobname());
+        prop.setProperty("companyname", this.getCompanyname());
+        prop.setProperty("address", this.getAddress());
+        List<Job> jobList = jobService.findJobByProperties(prop);
+        ActionContext.getContext().getSession().put("jobList", jobList);
+        return "searchJob";
+      }
+    } catch (Exception ex) {
+      ex.printStackTrace();
+      ServletActionContext.getRequest().setAttribute("msg", "搜索职位失败");
       return ERROR;
     }
   }
@@ -225,5 +277,38 @@ public class JobAction extends ActionSupport {
   public void setCompany(Company company) {
     this.company = company;
   }
+
+  public String getJobseekerid() {
+    return jobseekerid;
+  }
+
+  public void setJobseekerid(String jobseekerid) {
+    this.jobseekerid = jobseekerid;
+  }
+
+  public String getCompanyid() {
+    return companyid;
+  }
+
+  public void setCompanyid(String companyid) {
+    this.companyid = companyid;
+  }
+
+  public String getCompanyname() {
+    return companyname;
+  }
+
+  public void setCompanyname(String companyname) {
+    this.companyname = companyname;
+  }
+
+  public String getPagenum() {
+    return pagenum;
+  }
+
+  public void setPagenum(String pagenum) {
+    this.pagenum = pagenum;
+  }
+
   
 }

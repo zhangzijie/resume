@@ -1,12 +1,10 @@
 package com.zhangzj.resume.dao;
 
-import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
@@ -24,6 +22,7 @@ public class BaseDao<T> extends HibernateDaoSupport {
    * @param value
    * @return
    */
+  @SuppressWarnings("unchecked")
   public List<T> findByProperty(Class<T> entityClass, String propertyName, Object value) {
     try {
       String queryStr = "from " + entityClass.getName() + " as model where model." + propertyName + "=?";
@@ -38,6 +37,7 @@ public class BaseDao<T> extends HibernateDaoSupport {
    * @param entityClass
    * @return
    */
+  @SuppressWarnings("unchecked")
   public List<T> findAll(Class<T> entityClass) {
     try {
       return (List<T>) this.getHibernateTemplate().find("from " + entityClass.getName());
@@ -66,6 +66,7 @@ public class BaseDao<T> extends HibernateDaoSupport {
    * @param values
    * @return
    */
+  @SuppressWarnings("unchecked")
   public List<Object> find(String hql, Object... values) {
     try {
       return (List<Object>) this.getHibernateTemplate().find(hql, values);
@@ -95,6 +96,20 @@ public class BaseDao<T> extends HibernateDaoSupport {
   public List<T> findByCriteria(DetachedCriteria criteria){
     try {
       this.getHibernateTemplate().findByCriteria(criteria);
+      return null;
+    } catch (RuntimeException e) {
+      throw e;
+    }
+  }
+  
+  /**
+   * 模糊查询指定条件对象集合
+   * @param criteria
+   * @return
+   */
+  public List<T> findByCriteria(DetachedCriteria criteria, int firstResult, int maxResults){
+    try {
+      this.getHibernateTemplate().findByCriteria(criteria, firstResult, maxResults);
       return null;
     } catch (RuntimeException e) {
       throw e;

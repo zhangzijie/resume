@@ -1,5 +1,7 @@
 package com.zhangzj.resume.entity;
 
+import java.util.Set;
+
 public class Job {
   private int id;
   private String jobname;
@@ -14,6 +16,7 @@ public class Job {
   private String category;
   private String companyname;
   private Company company;
+  private Set<Resumetojob> resumetojobSet;
   
   public int getId() {
     return id;
@@ -117,6 +120,14 @@ public class Job {
 
   public void setCompanyname(String companyname) {
     this.companyname = companyname;
+  }
+
+  public Set<Resumetojob> getResumetojobSet() {
+    return resumetojobSet;
+  }
+
+  public void setResumetojobSet(Set<Resumetojob> resumetojobSet) {
+    this.resumetojobSet = resumetojobSet;
   }
   
 }

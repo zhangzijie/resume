@@ -1,6 +1,5 @@
 package com.zhangzj.resume.action;
 
-import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -28,6 +27,8 @@ public class SignupAction extends ActionSupport {
   public String signup() {
     try{
       String role = this.getRole();
+      ActionContext.getContext().getApplication().remove("company");
+      ActionContext.getContext().getApplication().remove("jobseeker");
       if ("jobseeker".equals(role)) {
         Jobseeker jobseeker = new Jobseeker();
         jobseeker.setUsername(this.getUsername());
