@@ -31,6 +31,9 @@
         <property name="description" type="java.lang.String">
             <column name="description" length="500"></column>
         </property>
+        <property name="welfare" type="java.lang.String">
+            <column name="welfare" length="500"></column>
+        </property>
         <set name="jobSet" inverse="true" lazy="true">
             <key column="id"/>
             <one-to-many class="com.zhangzj.resume.entity.Job"/>

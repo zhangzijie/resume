@@ -24,6 +24,16 @@ public class CompanyServiceImpl implements CompanyService {
       return null;
     }
   }
+  
+  @Override
+  public void updateCompany(Company company, String password) {
+    if(null == password || "".equals(password)) {
+      companyDao.updateCompany(company);
+    } else {
+      company.setPassword(MakeMD5.makeMD5(password));
+      companyDao.updateCompany(company);
+    }
+  }
 
   public CompanyDao getCompanyDao() {
     return companyDao;

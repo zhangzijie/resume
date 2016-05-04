@@ -1,8 +1,15 @@
-package com.zhangzj.resume.entity;
+package com.zhangzj.resume.action;
 
-import java.util.Set;
+import org.apache.struts2.ServletActionContext;
 
-public class Company {
+import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
+import com.zhangzj.resume.entity.Company;
+import com.zhangzj.resume.service.CompanyService;
+
+@SuppressWarnings("serial")
+public class CompanyAction extends ActionSupport {
+  private CompanyService companyService;
   private int id;
   private String username;
   private String password;
@@ -13,7 +20,37 @@ public class Company {
   private String address;
   private String description;
   private String welfare;
-  private Set<Job> jobSet;
+  
+  public String editCompany() {
+    return "editCompany";
+  }
+  
+  public String updateCompany() {
+    try {
+      Company company = (Company) ActionContext.getContext().getApplication().get("company");
+      company.setCompanyname(this.getCompanyname());
+      company.setLinkman(this.getLinkman());
+      company.setPhone(this.getPhone());
+      company.setEmail(this.getEmail());
+      company.setAddress(this.getAddress());
+      company.setDescription(this.getDescription());
+      company.setWelfare(this.getWelfare());
+      companyService.updateCompany(company, this.getPassword());
+      return SUCCESS;
+    } catch (Exception ex) {
+      ex.printStackTrace();
+      ServletActionContext.getRequest().setAttribute("msg", "保存公司信息失败");
+      return ERROR;
+    }
+  }
+
+  public CompanyService getCompanyService() {
+    return companyService;
+  }
+
+  public void setCompanyService(CompanyService companyService) {
+    this.companyService = companyService;
+  }
 
   public int getId() {
     return id;
@@ -85,14 +122,6 @@ public class Company {
 
   public void setDescription(String description) {
     this.description = description;
-  }
-
-  public Set<Job> getJobSet() {
-    return jobSet;
-  }
-
-  public void setJobSet(Set<Job> jobSet) {
-    this.jobSet = jobSet;
   }
 
   public String getWelfare() {

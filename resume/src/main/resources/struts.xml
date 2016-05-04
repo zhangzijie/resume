@@ -15,6 +15,11 @@
             <result name="input">index.html</result>
         </action>
         
+        <action name="*Company" class="CompanyAction" method="{1}Company">
+            <result name="editCompany">jsp/company/editCompany.jsp</result>
+            <result name="success">jsp/company/jobList.jsp</result>
+            <result name="error">jsp/company/jobList.jsp</result>
+        </action>
         <action name="*Resume" class="ResumeAction" method="{1}Resume">
             <result name="editResume">jsp/jobseeker/editResume.jsp</result>
             <result name="viewResume">jsp/jobseeker/viewResume.jsp</result>

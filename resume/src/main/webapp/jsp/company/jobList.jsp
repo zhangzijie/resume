@@ -44,6 +44,7 @@
                 <ul class="nav nav-sidebar" style="margin-top: 20px;">
                     <li class="active"><a href="listJob.action">职位管理</a></li>
                     <li><a href="listDelivery.action">收查简历</a></li>
+                    <li><a href="editCompany.action">修改公司信息</a></li>
                 </ul>
                 <ul class="nav nav-sidebar">
                     <li><a href="addJob.action"><span class="glyphicon glyphicon-file" aria-hidden="true" style="margin: 0 5px;"></span>增加职位</a></li>

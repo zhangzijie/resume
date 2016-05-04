@@ -14,6 +14,9 @@
         <property name="jobService" ref="jobService"></property>
     </bean>
     
+    <bean id="CompanyAction" class="com.zhangzj.resume.action.CompanyAction">
+        <property name="companyService" ref="companyService"></property>
+    </bean>
     <bean id="ResumeAction" class="com.zhangzj.resume.action.ResumeAction">
         <property name="resumeService" ref="resumeService"></property>
     </bean>
