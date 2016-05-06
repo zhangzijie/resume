@@ -1,5 +1,7 @@
 package com.zhangzj.resume.action;
 
+import java.io.File;
+
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -7,6 +9,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.zhangzj.resume.entity.Jobseeker;
 import com.zhangzj.resume.entity.Resume;
 import com.zhangzj.resume.service.ResumeService;
+import com.zhangzj.resume.util.FileUpload;
 
 @SuppressWarnings("serial")
 public class ResumeAction extends ActionSupport {
@@ -38,8 +41,12 @@ public class ResumeAction extends ActionSupport {
   private String certificate;
   private String awards;
   private String evaluation;
-  private String photo;
-  private String resumedoc;
+  private File photo;
+  private String photoFileName;
+  private String photoContentType;
+  private File resumedoc;
+  private String resumedocFileName;
+  private String resumedocContentType;
   
   public String addResume() {
     try {
@@ -47,7 +54,8 @@ public class ResumeAction extends ActionSupport {
       Resume resume = new Resume();
       resume.setJobseeker(jobseeker);
       resumeService.addResume(resume);
-      ActionContext.getContext().getSession().put("resume", resume);
+      ServletActionContext.getRequest().setAttribute("resume", resume);
+      //ActionContext.getContext().getSession().put("resume", resume);
       return "editResume";
     } catch (Exception ex) {
       ex.printStackTrace();
@@ -58,11 +66,10 @@ public class ResumeAction extends ActionSupport {
   
   public String editResume() {
     try {
-      //Jobseeker jobseeker = (Jobseeker) ActionContext.getContext().getApplication().get("jobseeker");
       Resume resume = new Resume();
       resume.setId(this.getId());
       resume = resumeService.findResumeById(resume);
-      ActionContext.getContext().getSession().put("resume", resume);
+      ServletActionContext.getRequest().setAttribute("resume", resume);
       return "editResume";
     } catch (Exception ex) {
       ex.printStackTrace();
@@ -73,7 +80,6 @@ public class ResumeAction extends ActionSupport {
   
   public String viewResume() {
     try {
-      //Jobseeker jobseeker = (Jobseeker) ActionContext.getContext().getApplication().get("jobseeker");
       Resume resume = new Resume();
       if(null != ServletActionContext.getRequest().getAttribute("resumeid")) {
         resume.setId((int) ServletActionContext.getRequest().getAttribute("resumeid"));
@@ -81,7 +87,8 @@ public class ResumeAction extends ActionSupport {
         resume.setId(this.getId());
       }
       resume = resumeService.findResumeById(resume);
-      ActionContext.getContext().getSession().put("resume", resume);
+      ServletActionContext.getRequest().setAttribute("resume", resume);
+      //ActionContext.getContext().getSession().put("resume", resume);
       return "viewResume";
     } catch (Exception ex) {
       ex.printStackTrace();
@@ -91,9 +98,10 @@ public class ResumeAction extends ActionSupport {
   }
   
   public String updateResume() {
-    Resume resume = (Resume) ActionContext.getContext().getSession().get("resume");
     try {
-      Jobseeker jobseeker = (Jobseeker) ActionContext.getContext().getApplication().get("jobseeker");
+      Resume resume = new Resume();
+      resume.setId(this.getId());
+      resume = resumeService.findResumeById(resume);
       resume.setResumename(this.getResumename());
       resume.setFullname(this.getFullname());
       resume.setSex(this.getSex());
@@ -120,9 +128,16 @@ public class ResumeAction extends ActionSupport {
       resume.setCertificate(this.getCertificate());
       resume.setAwards(this.getAwards());
       resume.setEvaluation(this.getEvaluation());
-      resume.setPhoto(this.getPhoto());
-      resume.setResumedoc(this.getResumedoc());
+      
+      if(null != this.getPhoto() && this.getPhoto().exists()) {
+        resume.setPhoto(FileUpload.Upload(this.getPhoto(), this.getPhotoFileName()));
+      }
+      if(null != this.getResumedoc() && this.getResumedoc().exists()) {
+        resume.setResumedoc(FileUpload.Upload(this.getResumedoc(), this.getResumedocFileName()));
+      }
+      
       resumeService.updateResume(resume);
+      Jobseeker jobseeker = (Jobseeker) ActionContext.getContext().getApplication().get("jobseeker");
       ActionContext.getContext().getSession().put("resumeList", resumeService.findResumeByJobseeker(jobseeker));
       return SUCCESS;
     } catch (Exception ex) {
@@ -383,20 +398,52 @@ public class ResumeAction extends ActionSupport {
     this.evaluation = evaluation;
   }
 
-  public String getPhoto() {
+  public File getPhoto() {
     return photo;
   }
 
-  public void setPhoto(String photo) {
+  public void setPhoto(File photo) {
     this.photo = photo;
   }
 
-  public String getResumedoc() {
+  public String getPhotoFileName() {
+    return photoFileName;
+  }
+
+  public void setPhotoFileName(String photoFileName) {
+    this.photoFileName = photoFileName;
+  }
+
+  public File getResumedoc() {
     return resumedoc;
   }
 
-  public void setResumedoc(String resumedoc) {
+  public void setResumedoc(File resumedoc) {
     this.resumedoc = resumedoc;
+  }
+
+  public String getResumedocFileName() {
+    return resumedocFileName;
+  }
+
+  public void setResumedocFileName(String resumedocFileName) {
+    this.resumedocFileName = resumedocFileName;
+  }
+
+  public String getPhotoContentType() {
+    return photoContentType;
+  }
+
+  public void setPhotoContentType(String photoContentType) {
+    this.photoContentType = photoContentType;
+  }
+
+  public String getResumedocContentType() {
+    return resumedocContentType;
+  }
+
+  public void setResumedocContentType(String resumedocContentType) {
+    this.resumedocContentType = resumedocContentType;
   }
   
 }

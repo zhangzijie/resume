@@ -20,7 +20,7 @@ public class CompanyDaoImpl extends BaseDao<Company> implements CompanyDao {
 
   @Override
   public void deleteCompany(Company company) {
-    this.delete(this.findCompanyByName(company));
+    this.delete(company);
   }
   
   @Override

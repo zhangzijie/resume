@@ -4,8 +4,10 @@ import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.zhangzj.resume.entity.Admin;
 import com.zhangzj.resume.entity.Company;
 import com.zhangzj.resume.entity.Jobseeker;
+import com.zhangzj.resume.service.AdminService;
 import com.zhangzj.resume.service.CompanyService;
 import com.zhangzj.resume.service.JobService;
 import com.zhangzj.resume.service.JobseekerService;
@@ -15,6 +17,7 @@ import com.zhangzj.resume.service.ResumeService;
 public class LoginAction extends ActionSupport {
   private JobseekerService jobseekerService;
   private CompanyService companyService;
+  private AdminService adminService;
   private ResumeService resumeService;
   private JobService jobService;
   private String username;
@@ -51,11 +54,26 @@ public class LoginAction extends ActionSupport {
           ActionContext.getContext().getSession().put("jobList", jobService.findJobByCompany(company));
           return "company";
         } else {
+          ServletActionContext.getRequest().setAttribute("msg", "登录失败，请输入正确的登录信息！");
+          return INPUT;
+        }
+      } else if ("admin".equals(role)){
+        Admin admin = new Admin();
+        admin.setUsername(this.getUsername());
+        admin.setPassword(this.getPassword());
+        admin = adminService.login(admin);
+        if (null != admin) {
+          ActionContext.getContext().getApplication().put("admin", admin);
+          ActionContext.getContext().getSession().put("jobseekerList", jobseekerService.findAll());
+          return "admin";
+        } else {
+          ServletActionContext.getRequest().setAttribute("msg", "登录失败，请输入正确的登录信息！");
           return INPUT;
         }
       }
     } catch (Exception ex) {
       ex.printStackTrace();
+      ServletActionContext.getRequest().setAttribute("msg", "登录失败，请输入正确的登录信息！");
       return INPUT;
     }
     return INPUT;
@@ -121,6 +139,14 @@ public class LoginAction extends ActionSupport {
 
   public void setRole(String role) {
     this.role = role;
+  }
+
+  public AdminService getAdminService() {
+    return adminService;
+  }
+
+  public void setAdminService(AdminService adminService) {
+    this.adminService = adminService;
   }
   
 }

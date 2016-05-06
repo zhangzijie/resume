@@ -1,5 +1,7 @@
 package com.zhangzj.resume.service.impl;
 
+import java.util.List;
+
 import com.zhangzj.resume.dao.CompanyDao;
 import com.zhangzj.resume.entity.Company;
 import com.zhangzj.resume.service.CompanyService;
@@ -33,6 +35,11 @@ public class CompanyServiceImpl implements CompanyService {
       company.setPassword(MakeMD5.makeMD5(password));
       companyDao.updateCompany(company);
     }
+  }
+
+  @Override
+  public List<Company> findAll() {
+    return companyDao.findAll();
   }
 
   public CompanyDao getCompanyDao() {

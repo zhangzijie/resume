@@ -20,7 +20,7 @@ public class JobseekerDaoImpl extends BaseDao<Jobseeker> implements JobseekerDao
 
   @Override
   public void deleteJobseeker(Jobseeker jobseeker) {
-    this.delete(this.findJobseekerByName(jobseeker));
+    this.delete(jobseeker);
   }
   
   @Override

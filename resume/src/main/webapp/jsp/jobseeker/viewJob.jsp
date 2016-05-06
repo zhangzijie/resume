@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>简历管理</title>
+    <title>查看职位</title>
     <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/jobseeker/style.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/jobseeker/viewJob.css" rel="stylesheet">
@@ -47,6 +47,7 @@
                     <li><a href="listDelivery.action">投递记录</a></li>
                     <li class="active"><a href="searchJob.action">职位搜索</a></li>
                     <li><a href="latestJob.action">最新招聘</a></li>
+                    <li><a href="editJobseeker.action">修改个人信息</a></li>
                 </ul>
                 <ul class="nav nav-sidebar">
                     <li><a href="addResume.action"><span class="glyphicon glyphicon-file" aria-hidden="true" style="margin: 0 5px;"></span>增加简历</a></li>
@@ -147,5 +148,30 @@
 
     });
 </script>
+
+<c:if test="${not empty msg}">
+<div class="modal fade" id="msgDialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><span class="label label-warning" style="margin-right:10px;">警告</span>失败信息</h4>
+            </div>
+            <div class="modal-body">
+                <p>${msg}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+  $(function(){
+    $('#msgDialog').modal('show');
+  });
+</script>
+</c:if>
+
 </body>
 </html>

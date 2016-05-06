@@ -7,9 +7,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>修改公司信息</title>
+    <title>修改个人信息</title>
     <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/css/company/style.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/jobseeker/style.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/jobseeker/editResume.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="${pageContext.request.contextPath}/js/html5shiv.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/respond.min.js"></script>
@@ -27,7 +28,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-home" aria-hidden="true" style="margin-right: 5px;"></span>求职简历管理系统</a>
-            <a class="navbar-brand" href="#" id="showname" style="margin-left: 50px;"><span class="glyphicon glyphicon-user" aria-hidden="true" style="margin-right: 5px;"></span>${company.companyname}，您好！</a>
+            <a class="navbar-brand" href="#" id="showname" style="margin-left: 50px;"><span class="glyphicon glyphicon-user" aria-hidden="true" style="margin-right: 5px;"></span>${jobseeker.fullname}，您好！</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -42,74 +43,42 @@
         <div class="row">
             <div class="col-sm-3 col-md-2">
                 <ul class="nav nav-sidebar" style="margin-top: 20px;">
-                    <li class="active"><a href="listJob.action">职位管理</a></li>
-                    <li><a href="listDelivery.action">收查简历</a></li>
-                    <li><a href="editCompany.action">修改公司信息</a></li>
+                    <li><a href="listResume.action">简历管理</a></li>
+                    <li><a href="listDelivery.action">投递记录</a></li>
+                    <li><a href="searchJob.action">职位搜索</a></li>
+                    <li><a href="latestJob.action">最新招聘</a></li>
+                    <li class="active"><a href="editJobseeker.action">修改个人信息</a></li>
                 </ul>
                 <ul class="nav nav-sidebar">
-                    <li><a href="#jobinfo"><span class="glyphicon glyphicon-user" aria-hidden="true" style="margin: 0 5px;"></span>公司信息</a></li>
-                    <li><a href="#description"><span class="glyphicon glyphicon-book" aria-hidden="true" style="margin: 0 5px;"></span>公司描述</a></li>
+                    <li><a href="#baseinfo"><span class="glyphicon glyphicon-user" aria-hidden="true" style="margin: 0 5px;"></span>个人信息</a></li>
                 </ul>
             </div>
             <div class="col-sm-9 col-md-10">
-                <form class="form-horizontal" id="company-form" action="updateCompany" method="post">
-                    <c:if test="${fillinfo}">
-	                <h3 class="sub-header">完善公司信息</h3>
-	                </c:if>
-	                <c:if test="${empty fillinfo}">
-	                <h3 class="sub-header">修改公司信息</h3>
-	                <div class="form-group">
+                <h3 class="sub-header">修改个人信息</h3>
+                <form class="form-horizontal" id="jobseeker-form" action="updateJobseeker" method="post">
+                    <div class="form-group">
                         <label class="col-sm-2 control-label">密码</label>
                         <div class="col-sm-5">
                             <input type="password" class="form-control" id="password" name="password" placeholder="不输入不修改">
                         </div>
                     </div>
-	                </c:if>
-                    <a name="jobinfo"></a>
-                    <legend>公司信息<span style="color: red;">*</span></legend>
+                    <legend><a name="baseinfo"></a>个人信息<span style="color: red;">*</span></legend>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">公司名称</label>
+                        <label class="col-sm-2 control-label">姓名</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="companyname" name="companyname" value="${company.companyname}" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">联系人姓名</label>
-                        <div class="col-sm-5">
-                            <input type="text" class="form-control" id="linkman" name="linkman" value="${company.linkman}" required>
+                            <input type="text" class="form-control" id="fullname" name="fullname" value="${jobseeker.fullname}" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">联系电话</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="phone" name="phone" value="${company.phone}" required>
+                            <input type="text" class="form-control" id="phone" name="phone" value="${jobseeker.phone}" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">电子邮箱</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="email" name="email" value="${company.email}" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">公司地址</label>
-                        <div class="col-sm-5">
-                            <input type="text" class="form-control" id="address" name="address" value="${company.address}" required>
-                        </div>
-                    </div>
-                    
-                    <a name="description"></a>
-                    <legend>公司描述</legend>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">公司简介</label>
-                        <div class="col-sm-5">
-                            <textarea rows="5" cols="30" class="form-control" id="description" name="description">${company.description}</textarea>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">福利待遇</label>
-                        <div class="col-sm-5">
-                            <textarea rows="5" cols="30" class="form-control" id="welfare" name="welfare">${company.welfare}</textarea>
+                            <input type="email" class="form-control" id="email" name="email" value="${jobseeker.email}" required>
                         </div>
                     </div>
                     

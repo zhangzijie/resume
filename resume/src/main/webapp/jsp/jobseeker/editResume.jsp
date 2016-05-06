@@ -48,6 +48,7 @@
                     <li><a href="listDelivery.action">投递记录</a></li>
                     <li><a href="searchJob.action">职位搜索</a></li>
                     <li><a href="latestJob.action">最新招聘</a></li>
+                    <li><a href="editJobseeker.action">修改个人信息</a></li>
                 </ul>
                 <ul class="nav nav-sidebar">
                     <li><a href="#baseinfo"><span class="glyphicon glyphicon-user" aria-hidden="true" style="margin: 0 5px;"></span>个人信息</a></li>
@@ -59,7 +60,8 @@
                 </ul>
             </div>
             <div class="col-sm-9 col-md-10">
-                <form class="form-horizontal" id="resume-form" action="updateResume" method="post">
+                <form class="form-horizontal" enctype="multipart/form-data" id="resume-form" action="updateResume" method="post">
+                    <input type="hidden" id="id" name="id" value="${resume.id}">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">简历名称</label>
                         <div class="col-sm-5">
@@ -491,13 +493,13 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">照片</label>
                         <div class="col-sm-5">
-                            <input type="file" id="photo" name="photo" value="${resume.photo}">
+                            <input type="file" accept="image/jpeg,image/png,image/gif" id="photo" name="photo">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">简历附件</label>
                         <div class="col-sm-5">
-                            <input type="file" id="resumedoc" name="resumedoc" value="${resume.resumedoc}">
+                            <input type="file" accept="application/msword,application/pdf" id="resumedoc" name="resumedoc">
                         </div>
                     </div>
 
@@ -515,6 +517,30 @@
 <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
 <script src="${pageContext.request.contextPath}/js/My97DatePicker/WdatePicker.js"></script>
+
+<c:if test="${not empty msg}">
+<div class="modal fade" id="msgDialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><span class="label label-warning" style="margin-right:10px;">警告</span>失败信息</h4>
+            </div>
+            <div class="modal-body">
+                <p>${msg}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+  $(function(){
+    $('#msgDialog').modal('show');
+  });
+</script>
+</c:if>
 
 </body>
 </html>

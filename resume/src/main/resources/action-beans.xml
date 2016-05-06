@@ -8,12 +8,19 @@
         <property name="companyService" ref="companyService"></property>
     </bean>
     <bean id="LoginAction" class="com.zhangzj.resume.action.LoginAction">
+        <property name="adminService" ref="adminService"></property>
         <property name="jobseekerService" ref="jobseekerService"></property>
         <property name="companyService" ref="companyService"></property>
         <property name="resumeService" ref="resumeService"></property>
         <property name="jobService" ref="jobService"></property>
     </bean>
     
+    <bean id="AdminAction" class="com.zhangzj.resume.action.AdminAction">
+        <property name="adminService" ref="adminService"></property>
+    </bean>
+    <bean id="JobseekerAction" class="com.zhangzj.resume.action.JobseekerAction">
+        <property name="jobseekerService" ref="jobseekerService"></property>
+    </bean>
     <bean id="CompanyAction" class="com.zhangzj.resume.action.CompanyAction">
         <property name="companyService" ref="companyService"></property>
     </bean>

@@ -1,6 +1,8 @@
 package com.zhangzj.resume.action;
 
 
+import org.apache.struts2.ServletActionContext;
+
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.zhangzj.resume.entity.Company;
@@ -49,11 +51,13 @@ public class SignupAction extends ActionSupport {
         company.setEmail(this.getEmailc());
         company.setAddress(this.getAddress());
         companyService.signup(company);
+        ServletActionContext.getRequest().setAttribute("fillinfo", true);
         ActionContext.getContext().getApplication().put("company", company);
         return "company";
       }
     } catch (Exception ex) {
       ex.printStackTrace();
+      ServletActionContext.getRequest().setAttribute("msg", "注册失败！");
       return INPUT;
     }
     return INPUT;

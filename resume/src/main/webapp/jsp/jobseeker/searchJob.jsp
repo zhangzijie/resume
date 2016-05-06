@@ -47,6 +47,7 @@
                     <li><a href="listDelivery.action">投递记录</a></li>
                     <li class="active"><a href="searchJob.action">职位搜索</a></li>
                     <li><a href="latestJob.action">最新招聘</a></li>
+                    <li><a href="editJobseeker.action">修改个人信息</a></li>
                 </ul>
                 <ul class="nav nav-sidebar">
                     <li><a href="addResume.action"><span class="glyphicon glyphicon-file" aria-hidden="true" style="margin: 0 5px;"></span>增加简历</a></li>
@@ -75,8 +76,8 @@
                                 <td>没有符合的职位！</td>
                             </tr>
                         </c:if>
-                        <c:if test="${null != jobList}">
-                            <c:forEach var="jobitem" items="${jobList}" varStatus="status">
+                        <c:if test="${not empty jobList && not empty page}">
+                            <c:forEach var="jobitem" items="${jobList}" varStatus="status" begin="${page.firstResult}" end="${page.lastResult}">
                                 <tr>
                                     <td><a href="viewJob.action?id=${jobitem.id}" target="_blank">${jobitem.jobname}</a></td>
                                     <td>${jobitem.companyname}</td>
@@ -86,14 +87,62 @@
                         </c:if>
                         </tbody>
                     </table>
+                    <c:if test="${not empty jobList && not empty page}">
+                        <nav>
+	                      <ul class="pagination">
+	                        <li>
+	                          <a href="#" aria-label="Previous">
+	                            <span aria-hidden="true">&laquo;</span>
+	                          </a>
+	                        </li>
+	                        <c:forEach var="s" begin="0" end="${page.maxPage-1}" varStatus="status">
+	                           <c:if test="${status.index+1 == page.pageNum}">
+	                           <li class="active"><a href="searchJob.action?pagenum=${status.index+1}">${status.index+1}</a></li>
+	                           </c:if>
+	                           <c:if test="${status.index+1 ne page.pageNum}">
+                               <li><a href="searchJob.action?pagenum=${status.index+1}">${status.index+1}</a></li>
+                               </c:if>
+	                        </c:forEach>
+	                        <li>
+	                          <a href="#" aria-label="Next">
+	                            <span aria-hidden="true">&raquo;</span>
+	                          </a>
+	                        </li>
+	                      </ul>
+	                    </nav>
+                    </c:if>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-
 <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
+
+<c:if test="${not empty msg}">
+<div class="modal fade" id="msgDialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><span class="label label-warning" style="margin-right:10px;">警告</span>失败信息</h4>
+            </div>
+            <div class="modal-body">
+                <p>${msg}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+  $(function(){
+    $('#msgDialog').modal('show');
+  });
+</script>
+</c:if>
+
 </body>
 </html>

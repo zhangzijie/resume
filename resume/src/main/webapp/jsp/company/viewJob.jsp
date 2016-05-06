@@ -108,5 +108,30 @@
 
     });
 </script>
+
+<c:if test="${not empty msg}">
+<div class="modal fade" id="msgDialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><span class="label label-warning" style="margin-right:10px;">警告</span>失败信息</h4>
+            </div>
+            <div class="modal-body">
+                <p>${msg}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+  $(function(){
+    $('#msgDialog').modal('show');
+  });
+</script>
+</c:if>
+
 </body>
 </html>

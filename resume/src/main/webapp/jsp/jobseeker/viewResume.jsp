@@ -7,6 +7,7 @@
 <head>
 	<%@ page language="java" contentType="text/html; charset=UTF-8"
 	    pageEncoding="UTF-8"%>
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<meta charset="utf-8">
     <title>查看简历</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +22,12 @@
                 <h1>${resume.fullname}</h1>
                 <h2>${resume.jobintension}</h2>
             </section>
-            <address>
+            <address class="header-left">
+                <c:if test="${not empty resume.photo}">
+	            <figure class="header-qrcode">
+	                <img src="${pageContext.request.contextPath}${resume.photo}" class="qrcode-img invisible-lt-sm visible-print" />
+	            </figure>
+	            </c:if>
                 <ul class="contact">
                     <li class="contact-sex">性别：${resume.sex}</li>
                     <li class="contact-birthday">出生日期：${resume.birthday}</li>
@@ -109,6 +115,11 @@
                         </ul>
                     </div>
                 </section>
+                <c:if test="${not empty resume.resumedoc}">
+                <div class="resumedoc">
+                    <a href="${pageContext.request.contextPath}${resume.resumedoc}">简历附件下载</a>
+                </div>
+                </c:if>
             </article>
             <div class="column-2 column"></div>
         </article>

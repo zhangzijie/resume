@@ -1,3 +1,15 @@
 .content {
-    
+    height: 700px;
+}
+
+@media screen and (max-width: 992px) {
+    .content {
+        height: 600px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .content {
+        height: auto;
+    }
 }

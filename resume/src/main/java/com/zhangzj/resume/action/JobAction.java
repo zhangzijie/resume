@@ -11,6 +11,7 @@ import com.zhangzj.resume.entity.Company;
 import com.zhangzj.resume.entity.Job;
 import com.zhangzj.resume.service.JobService;
 import com.zhangzj.resume.util.GetNowDate;
+import com.zhangzj.resume.util.Page;
 
 @SuppressWarnings("serial")
 public class JobAction extends ActionSupport {
@@ -154,17 +155,26 @@ public class JobAction extends ActionSupport {
     }
   }
   
+  @SuppressWarnings("unchecked")
   public String searchJob() {
     try {
       if(null == this.getJobname() || "".equals(this.getJobname())) {
+        ActionContext.getContext().getSession().remove("jobList");
         return "searchJob";
       } else {
-        Properties prop = new Properties();
-        prop.setProperty("jobname", this.getJobname());
-        prop.setProperty("companyname", this.getCompanyname());
-        prop.setProperty("address", this.getAddress());
-        List<Job> jobList = jobService.findJobByProperties(prop);
-        ActionContext.getContext().getSession().put("jobList", jobList);
+        if (null == this.getPagenum() || "".equals(this.getPagenum())) {
+          Properties prop = new Properties();
+          prop.setProperty("jobname", this.getJobname());
+          prop.setProperty("companyname", this.getCompanyname());
+          prop.setProperty("address", this.getAddress());
+          List<Job> jobList = jobService.findJobByProperties(prop);
+          ActionContext.getContext().getSession().put("jobList", jobList);
+          Page page = new Page(1,jobList.size());
+          ServletActionContext.getRequest().setAttribute("page", page);
+        } else {
+          Page page = new Page(Integer.parseInt(this.getPagenum()), ((List<Job>)ActionContext.getContext().getSession().get("jobList")).size());
+          ServletActionContext.getRequest().setAttribute("page", page);
+        }
         return "searchJob";
       }
     } catch (Exception ex) {

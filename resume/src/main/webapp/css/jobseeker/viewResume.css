@@ -252,6 +252,16 @@ dl, ol, ul {
     margin-right: -.1px
 }
 
+.header-qrcode {
+    margin-right: 0;
+    float: left;
+}
+
+.header-qrcode .qrcode-img {
+    width: 100px;
+    height: 140px
+}
+
 header {
     padding-bottom: 6px;
     background-color: #333
@@ -260,7 +270,7 @@ header {
 .title {
     float: right;
     text-align: right;
-    margin-right: 12%;
+    margin-right: 8%;
 }
 
 @media screen and (max-width: 992px) {
@@ -276,15 +286,15 @@ header {
     }
 }
 
+.header-left{
+    margin-left: 8%
+}
+
 .title h1, .title h2 {
     margin: 5px 0;
     line-height: 1;
 }
 
-header .contact {
-    float: left;
-    margin-left: 20%;
-}
 
 @media screen and (max-width: 992px) {
     header .contact {
@@ -301,6 +311,7 @@ header .contact {
 }
 
 header .contact {
+    float: left;
     padding-left: 16px
 }
 
@@ -833,4 +844,25 @@ add by zzj
 .contentarea {
     margin:0;
     padding:5px 0 0 0;
+}
+
+.resumedoc {
+    padding:20px;
+}
+
+.resumedoc a {
+    padding-left: 28px;
+}
+
+.resumedoc a::before {
+    font-size: inherit;
+    width: 28px;
+    margin-left: -28px;
+    display: inline-block;
+    font-family: FontAwesome;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transform: translate(0, 0);
+    content: "\f019"
 }

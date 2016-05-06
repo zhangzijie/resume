@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
+	    pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,6 +32,7 @@
           <div class="radiogroup">
             <span><input type="radio" name="role" value="jobseeker">求职者</span>
             <span><input type="radio" name="role" value="company">招聘单位</span>
+            <span><input type="radio" name="role" value="admin">管理员</span>
           </div>
           <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
         </form>
@@ -59,5 +63,30 @@
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/index/index.js"></script>
+    
+    <c:if test="${not empty msg}">
+    <div class="modal fade" id="msgDialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"><span class="label label-warning" style="margin-right:10px;">警告</span>失败信息</h4>
+                </div>
+                <div class="modal-body">
+                    <p>${msg}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+      $(function(){
+        $('#msgDialog').modal('show');
+      });
+    </script>
+    </c:if>
+
   </body>
 </html>
