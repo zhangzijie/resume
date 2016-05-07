@@ -11,7 +11,7 @@ public class Page {
   public Page(int pageNum, int total) {
     this.setPageNum(pageNum);
     this.setTotal(total);
-    this.setFirstResult(this.getPageNum()*this.getPageSize()-this.getPageSize()+1);
+    this.setFirstResult(this.getPageNum()*this.getPageSize()-this.getPageSize());
     this.setLastResult(this.getFirstResult()+this.getPageSize()-1);
     this.setMaxPage((new Double(Math.ceil((double)this.getTotal()/(double)this.getPageSize()))).intValue());
   }
@@ -20,7 +20,7 @@ public class Page {
     this.setPageNum(pageNum);
     this.setTotal(total);
     this.setPageSize(pageSize);
-    this.setFirstResult(this.getPageNum()*this.getPageSize()-this.getPageSize()+1);
+    this.setFirstResult(this.getPageNum()*this.getPageSize()-this.getPageSize());
     this.setLastResult(this.getFirstResult()+this.getPageSize()-1);
     this.setMaxPage((new Double(Math.ceil((double)this.getTotal()/(double)this.getPageSize()))).intValue());
   }

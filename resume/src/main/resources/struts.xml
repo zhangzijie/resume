@@ -12,19 +12,34 @@
         <action name="log*" class="LoginAction" method="log{1}">
             <result name="jobseeker">jsp/jobseeker/resumeList.jsp</result>
             <result name="company">jsp/company/jobList.jsp</result>
-            <result name="admin">jsp/jobseeker/resumeList.jsp</result>
+            <result type="chain" name="admin">listJobseeker</result>
             <result name="input">index.jsp</result>
         </action>
         
+        <action name="*Admin" class="AdminAction" method="{1}Admin">
+            <result name="editAdmin">jsp/admin/editAdmin.jsp</result>
+            <result type="chain" name="success">listJobseeker</result>
+            <result type="chain" name="error">listJobseeker</result>
+        </action>
         <action name="*Jobseeker" class="JobseekerAction" method="{1}Jobseeker">
             <result name="editJobseeker">jsp/jobseeker/editJobseeker.jsp</result>
             <result name="success">jsp/jobseeker/resumeList.jsp</result>
             <result name="error">jsp/jobseeker/resumeList.jsp</result>
+            <result name="adminSuccess">jsp/admin/jobseekerList.jsp</result>
+            <result name="adminError">jsp/admin/jobseekerList.jsp</result>
+            <result type="chain" name="listJobseeker">listJobseeker</result>
+            <result name="adminEditJobseeker">jsp/admin/editJobseeker.jsp</result>
+            <result name="input">index.jsp</result>
         </action>
         <action name="*Company" class="CompanyAction" method="{1}Company">
             <result name="editCompany">jsp/company/editCompany.jsp</result>
             <result name="success">jsp/company/jobList.jsp</result>
             <result name="error">jsp/company/jobList.jsp</result>
+            <result name="adminSuccess">jsp/admin/companyList.jsp</result>
+            <result name="adminError">jsp/admin/companyList.jsp</result>
+            <result type="chain" name="listCompany">listCompany</result>
+            <result name="adminEditCompany">jsp/admin/editCompany.jsp</result>
+            <result name="input">index.jsp</result>
         </action>
         <action name="*Resume" class="ResumeAction" method="{1}Resume">
             <result name="editResume">jsp/jobseeker/editResume.jsp</result>

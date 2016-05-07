@@ -42,6 +42,21 @@ public class JobseekerServiceImpl implements JobseekerService {
     return jobseekerDao.findAll();
   }
 
+  @Override
+  public Jobseeker findJobseekerByName(Jobseeker jobseeker) {
+    return jobseekerDao.findJobseekerByName(jobseeker);
+  }
+
+  @Override
+  public void deleteJobseeker(Jobseeker jobseeker) {
+    jobseekerDao.deleteJobseeker(jobseeker);
+  }
+
+  @Override
+  public Jobseeker findJobseekerById(Jobseeker jobseeker) {
+    return jobseekerDao.findJobseekerByID(jobseeker);
+  }
+
   public JobseekerDao getJobseekerDao() {
     return jobseekerDao;
   }

@@ -42,12 +42,12 @@
         <div class="row">
             <div class="col-sm-3 col-md-2">
                 <ul class="nav nav-sidebar" style="margin-top: 20px;">
-                    <li class="active"><a href="listJob.action">职位管理</a></li>
+                    <li><a href="listJob.action">职位管理</a></li>
                     <li><a href="listDelivery.action">收查简历</a></li>
-                    <li><a href="editCompany.action">修改公司信息</a></li>
+                    <li class="active"><a href="editCompany.action">修改公司信息</a></li>
                 </ul>
                 <ul class="nav nav-sidebar">
-                    <li><a href="#jobinfo"><span class="glyphicon glyphicon-user" aria-hidden="true" style="margin: 0 5px;"></span>公司信息</a></li>
+                    <li><a href="#companyname"><span class="glyphicon glyphicon-user" aria-hidden="true" style="margin: 0 5px;"></span>公司信息</a></li>
                     <li><a href="#description"><span class="glyphicon glyphicon-book" aria-hidden="true" style="margin: 0 5px;"></span>公司描述</a></li>
                 </ul>
             </div>
@@ -65,7 +65,7 @@
                         </div>
                     </div>
 	                </c:if>
-                    <a name="jobinfo"></a>
+                    <a name="companyname"></a>
                     <legend>公司信息<span style="color: red;">*</span></legend>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">公司名称</label>
@@ -133,7 +133,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title"><span class="label label-warning" style="margin-right:10px;">警告</span>失败信息</h4>
+                <h4 class="modal-title" style="color:#dd0000; font-weight:bold;">失败</h4>
             </div>
             <div class="modal-body">
                 <p>${msg}</p>

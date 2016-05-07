@@ -155,7 +155,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title"><span class="label label-warning" style="margin-right:10px;">警告</span>失败信息</h4>
+                <h4 class="modal-title" style="color:#dd0000; font-weight:bold;">失败</h4>
             </div>
             <div class="modal-body">
                 <p>${msg}</p>

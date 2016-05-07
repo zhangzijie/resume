@@ -1,5 +1,8 @@
 package com.zhangzj.resume.action;
 
+import org.apache.struts2.ServletActionContext;
+
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.zhangzj.resume.entity.Admin;
 import com.zhangzj.resume.service.AdminService;
@@ -13,16 +16,18 @@ public class AdminAction extends ActionSupport {
   
   public String updateAdmin() {
     try{
-      Admin admin = new Admin();
-      admin.setId(this.getId());
-      admin = adminService.findAdminById(admin);
-      admin.setUsername(this.getUsername());
+      Admin admin = (Admin) ActionContext.getContext().getApplication().get("admin");
       adminService.updateAdmin(admin, this.getPassword());
     } catch (Exception ex) {
+      ServletActionContext.getRequest().setAttribute("msg", "修改管理员信息失败");
       ex.printStackTrace();
       return ERROR;
     }
     return SUCCESS;
+  }
+  
+  public String editAdmin() {
+    return "editAdmin";
   }
 
   public AdminService getAdminService() {

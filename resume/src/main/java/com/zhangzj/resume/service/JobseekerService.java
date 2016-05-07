@@ -9,4 +9,7 @@ public interface JobseekerService {
   public Jobseeker login(Jobseeker jobseeker);
   public void updateJobseeker(Jobseeker jobseeker, String password);
   public List<Jobseeker> findAll();
+  public Jobseeker findJobseekerByName(Jobseeker jobseeker);
+  public void deleteJobseeker(Jobseeker jobseeker);
+  public Jobseeker findJobseekerById(Jobseeker jobseeker);
 }

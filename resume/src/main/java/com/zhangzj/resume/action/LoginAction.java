@@ -82,6 +82,7 @@ public class LoginAction extends ActionSupport {
   public String logout() {
     ActionContext.getContext().getApplication().remove("company");
     ActionContext.getContext().getApplication().remove("jobseeker");
+    ActionContext.getContext().getApplication().remove("admin");
     return INPUT;
   }
 

@@ -9,4 +9,7 @@ public interface CompanyService {
   public Company login(Company company);
   public void updateCompany(Company company, String password);
   public List<Company> findAll();
+  public Company findCompanyByName(Company company);
+  public void deleteCompany(Company company);
+  public Company findCompanyById(Company company);
 }

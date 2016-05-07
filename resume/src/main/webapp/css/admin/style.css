@@ -68,7 +68,6 @@ body {
 }
 
 
-/* add by zzj*/
 .content {
     padding: 20px;
     margin: 20px -20px; /* negative indent the amount of the padding to maintain the grid system */
@@ -78,14 +77,4 @@ body {
     -webkit-box-shadow: 0 2px 10px rgba(0,0,0,.75);
     -moz-box-shadow: 0 2px 102px rgba(0,0,0,.75);
     box-shadow: 0 2px 10px rgba(0,0,0,.75);
-}
-
-.table-content {
-    height: 600px;
-}
-
-@media screen and (max-width: 767px) {
-    .table-content {
-        height: auto;
-    }
 }

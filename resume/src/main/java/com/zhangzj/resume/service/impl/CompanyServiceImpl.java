@@ -42,6 +42,21 @@ public class CompanyServiceImpl implements CompanyService {
     return companyDao.findAll();
   }
 
+  @Override
+  public Company findCompanyByName(Company company) {
+    return companyDao.findCompanyByName(company);
+  }
+
+  @Override
+  public void deleteCompany(Company company) {
+    companyDao.deleteCompany(company);
+  }
+
+  @Override
+  public Company findCompanyById(Company company) {
+    return companyDao.findCompanyByID(company);
+  }
+
   public CompanyDao getCompanyDao() {
     return companyDao;
   }
