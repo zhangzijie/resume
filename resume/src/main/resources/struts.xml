@@ -56,6 +56,7 @@
             <result name="searchJob">jsp/jobseeker/searchJob.jsp</result>
             <result name="success">jsp/company/jobList.jsp</result>
             <result name="error">jsp/company/jobList.jsp</result>
+            <result name="jobseekerError">jsp/jobseeker/resumeList.jsp</result>
         </action>
         
         <action name="*Delivery" class="DeliveryAction" method="{1}Delivery">

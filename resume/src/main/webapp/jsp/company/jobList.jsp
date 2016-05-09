@@ -10,7 +10,7 @@
     <title>职位管理</title>
     <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/company/style.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/css/company/jobList.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/company/contentHeight.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="${pageContext.request.contextPath}/js/html5shiv.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/respond.min.js"></script>

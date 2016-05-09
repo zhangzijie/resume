@@ -10,7 +10,7 @@
     <title>修改个人信息</title>
     <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/jobseeker/style.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/css/jobseeker/resumeList.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/jobseeker/contentHeight.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="${pageContext.request.contextPath}/js/html5shiv.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/respond.min.js"></script>

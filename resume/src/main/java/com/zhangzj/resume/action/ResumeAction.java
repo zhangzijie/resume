@@ -50,12 +50,7 @@ public class ResumeAction extends ActionSupport {
   
   public String addResume() {
     try {
-      Jobseeker jobseeker = (Jobseeker) ActionContext.getContext().getApplication().get("jobseeker");
-      Resume resume = new Resume();
-      resume.setJobseeker(jobseeker);
-      resumeService.addResume(resume);
-      ServletActionContext.getRequest().setAttribute("resume", resume);
-      //ActionContext.getContext().getSession().put("resume", resume);
+      ActionContext.getContext().getSession().put("addflag", "true");
       return "editResume";
     } catch (Exception ex) {
       ex.printStackTrace();
@@ -70,6 +65,7 @@ public class ResumeAction extends ActionSupport {
       resume.setId(this.getId());
       resume = resumeService.findResumeById(resume);
       ServletActionContext.getRequest().setAttribute("resume", resume);
+      ActionContext.getContext().getSession().put("addflag", "false");
       return "editResume";
     } catch (Exception ex) {
       ex.printStackTrace();
@@ -99,44 +95,85 @@ public class ResumeAction extends ActionSupport {
   
   public String updateResume() {
     try {
-      Resume resume = new Resume();
-      resume.setId(this.getId());
-      resume = resumeService.findResumeById(resume);
-      resume.setResumename(this.getResumename());
-      resume.setFullname(this.getFullname());
-      resume.setSex(this.getSex());
-      resume.setBirthday(this.getBirthday());
-      resume.setIdnumber(this.getIdnumber());
-      resume.setPhone(this.getPhone());
-      resume.setEmail(this.getEmail());
-      resume.setWorkyear(this.getWorkyear());
-      resume.setCity(this.getCity());
-      resume.setJobintension(this.getJobintension());
-      resume.setStudystartdate(this.getStudystartdate());
-      resume.setStudyenddate(this.getStudyenddate());
-      resume.setSchool(this.getSchool());
-      resume.setMajor(this.getMajor());
-      resume.setDegree(this.getDegree());
-      resume.setWorkstartdate(this.getWorkstartdate());
-      resume.setWorkenddate(this.getWorkenddate());
-      resume.setCompany(this.getCompany());
-      resume.setJobname(this.getJobname());
-      resume.setWorkdesc(this.getWorkdesc());
-      resume.setSkill(this.getSkill());
-      resume.setEnglishlevel(this.getEnglishlevel());
-      resume.setOtherlang(this.getOtherlang());
-      resume.setCertificate(this.getCertificate());
-      resume.setAwards(this.getAwards());
-      resume.setEvaluation(this.getEvaluation());
-      
-      if(null != this.getPhoto() && this.getPhoto().exists()) {
-        resume.setPhoto(FileUpload.Upload(this.getPhoto(), this.getPhotoFileName()));
+      if (null != ActionContext.getContext().getSession().get("addflag") && "true".equals((String)ActionContext.getContext().getSession().get("addflag"))) {
+        Jobseeker jobseeker = (Jobseeker) ActionContext.getContext().getApplication().get("jobseeker");
+        Resume resume = new Resume();
+        resume.setJobseeker(jobseeker);
+        resume.setResumename(this.getResumename());
+        resume.setFullname(this.getFullname());
+        resume.setSex(this.getSex());
+        resume.setBirthday(this.getBirthday());
+        resume.setIdnumber(this.getIdnumber());
+        resume.setPhone(this.getPhone());
+        resume.setEmail(this.getEmail());
+        resume.setWorkyear(this.getWorkyear());
+        resume.setCity(this.getCity());
+        resume.setJobintension(this.getJobintension());
+        resume.setStudystartdate(this.getStudystartdate());
+        resume.setStudyenddate(this.getStudyenddate());
+        resume.setSchool(this.getSchool());
+        resume.setMajor(this.getMajor());
+        resume.setDegree(this.getDegree());
+        resume.setWorkstartdate(this.getWorkstartdate());
+        resume.setWorkenddate(this.getWorkenddate());
+        resume.setCompany(this.getCompany());
+        resume.setJobname(this.getJobname());
+        resume.setWorkdesc(this.getWorkdesc());
+        resume.setSkill(this.getSkill());
+        resume.setEnglishlevel(this.getEnglishlevel());
+        resume.setOtherlang(this.getOtherlang());
+        resume.setCertificate(this.getCertificate());
+        resume.setAwards(this.getAwards());
+        resume.setEvaluation(this.getEvaluation());
+        if(null != this.getPhoto() && this.getPhoto().exists()) {
+          resume.setPhoto(FileUpload.Upload(this.getPhoto(), this.getPhotoFileName()));
+        }
+        if(null != this.getResumedoc() && this.getResumedoc().exists()) {
+          resume.setResumedoc(FileUpload.Upload(this.getResumedoc(), this.getResumedocFileName()));
+        }
+        resumeService.addResume(resume);
+        
+        ActionContext.getContext().getSession().remove("addflag");
+      } else if(null != ActionContext.getContext().getSession().get("addflag") && "false".equals((String)ActionContext.getContext().getSession().get("addflag"))) {
+        Resume resume = new Resume();
+        resume.setId(this.getId());
+        resume = resumeService.findResumeById(resume);
+        resume.setResumename(this.getResumename());
+        resume.setFullname(this.getFullname());
+        resume.setSex(this.getSex());
+        resume.setBirthday(this.getBirthday());
+        resume.setIdnumber(this.getIdnumber());
+        resume.setPhone(this.getPhone());
+        resume.setEmail(this.getEmail());
+        resume.setWorkyear(this.getWorkyear());
+        resume.setCity(this.getCity());
+        resume.setJobintension(this.getJobintension());
+        resume.setStudystartdate(this.getStudystartdate());
+        resume.setStudyenddate(this.getStudyenddate());
+        resume.setSchool(this.getSchool());
+        resume.setMajor(this.getMajor());
+        resume.setDegree(this.getDegree());
+        resume.setWorkstartdate(this.getWorkstartdate());
+        resume.setWorkenddate(this.getWorkenddate());
+        resume.setCompany(this.getCompany());
+        resume.setJobname(this.getJobname());
+        resume.setWorkdesc(this.getWorkdesc());
+        resume.setSkill(this.getSkill());
+        resume.setEnglishlevel(this.getEnglishlevel());
+        resume.setOtherlang(this.getOtherlang());
+        resume.setCertificate(this.getCertificate());
+        resume.setAwards(this.getAwards());
+        resume.setEvaluation(this.getEvaluation());
+        if(null != this.getPhoto() && this.getPhoto().exists()) {
+          resume.setPhoto(FileUpload.Upload(this.getPhoto(), this.getPhotoFileName()));
+        }
+        if(null != this.getResumedoc() && this.getResumedoc().exists()) {
+          resume.setResumedoc(FileUpload.Upload(this.getResumedoc(), this.getResumedocFileName()));
+        }
+        resumeService.updateResume(resume);
+      } else {
+        ServletActionContext.getRequest().setAttribute("msg", "保存简历失败");
       }
-      if(null != this.getResumedoc() && this.getResumedoc().exists()) {
-        resume.setResumedoc(FileUpload.Upload(this.getResumedoc(), this.getResumedocFileName()));
-      }
-      
-      resumeService.updateResume(resume);
       Jobseeker jobseeker = (Jobseeker) ActionContext.getContext().getApplication().get("jobseeker");
       ActionContext.getContext().getSession().put("resumeList", resumeService.findResumeByJobseeker(jobseeker));
       return SUCCESS;

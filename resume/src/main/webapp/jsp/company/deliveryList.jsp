@@ -10,7 +10,7 @@
     <title>收查简历</title>
     <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/company/style.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/css/company/jobList.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/company/contentHeight.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="${pageContext.request.contextPath}/js/html5shiv.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/respond.min.js"></script>
@@ -60,18 +60,18 @@
                             <th>申请人</th>
                             <th>申请简历</th>
                             <th>申请时间</th>
-                            <th>删除该记录</th>
+                            <th>回绝该申请</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:if test="${null == deliveryList || null == deliveryList[0]}">
+                        <c:if test="${null == deliveryList[0]}">
                             <tr>
                                 <td></td>
                                 <td>还没有收到任何简历！</td>
                             </tr>
                         </c:if>
-                        <c:if test="${null != deliveryList}">
-                            <c:forEach var="deliveryitem" items="${deliveryList}" varStatus="status">
+                        <c:if test="${not empty deliveryList && not empty page}">
+                            <c:forEach var="deliveryitem" items="${deliveryList}" varStatus="status" begin="${page.firstResult}" end="${page.lastResult}">
                                 <tr <c:if test="${deliveryitem.state eq '待查看'}">style="font-weight:bold;"</c:if> >
                                     <td><a href="viewJob.action?id=${deliveryitem.job.id}" target="_blank">${deliveryitem.jobname}</a></td>
                                     <td>${deliveryitem.jobseekername}</td>
@@ -83,6 +83,30 @@
                         </c:if>
                         </tbody>
                     </table>
+                    <c:if test="${not empty deliveryList && not empty page}">
+                        <nav>
+                          <ul class="pagination">
+                            <li>
+                              <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                              </a>
+                            </li>
+                            <c:forEach var="s" begin="0" end="${page.maxPage-1}" varStatus="status">
+                               <c:if test="${status.index+1 == page.pageNum}">
+                               <li class="active"><a href="searchJob.action?pagenum=${status.index+1}">${status.index+1}</a></li>
+                               </c:if>
+                               <c:if test="${status.index+1 ne page.pageNum}">
+                               <li><a href="searchJob.action?pagenum=${status.index+1}">${status.index+1}</a></li>
+                               </c:if>
+                            </c:forEach>
+                            <li>
+                              <a href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </nav>
+                    </c:if>
                 </div>
             </div>
         </div>

@@ -35,12 +35,9 @@ public class JobAction extends ActionSupport {
   
   public String addJob() {
     try {
-      Company company = (Company) ActionContext.getContext().getApplication().get("company");
-      Job job = new Job();
-      job.setCompanyname(company.getCompanyname());
-      job.setCompany(company);
-      jobService.addJob(job);
-      ActionContext.getContext().getSession().put("job", job);
+      
+      
+      ActionContext.getContext().getSession().put("addflag", "true");
       return "editJob";
     } catch (Exception ex) {
       ex.printStackTrace();
@@ -51,11 +48,11 @@ public class JobAction extends ActionSupport {
   
   public String editJob() {
     try {
-      //Company company = (Company) ActionContext.getContext().getApplication().get("company");
       Job job = new Job();
       job.setId(this.getId());
       job = jobService.findJobById(job);
-      ActionContext.getContext().getSession().put("job", job);
+      ServletActionContext.getRequest().setAttribute("job", job);
+      ActionContext.getContext().getSession().put("addflag", "false");
       return "editJob";
     } catch (Exception ex) {
       ex.printStackTrace();
@@ -86,20 +83,44 @@ public class JobAction extends ActionSupport {
   }
   
   public String updateJob() {
-    Job job = (Job) ActionContext.getContext().getSession().get("job");
     try {
+      if (null != ActionContext.getContext().getSession().get("addflag") && "true".equals((String)ActionContext.getContext().getSession().get("addflag"))) {
+        Company company = (Company) ActionContext.getContext().getApplication().get("company");
+        Job job = new Job();
+        job.setCompanyname(company.getCompanyname());
+        job.setCompany(company);
+        job.setJobname(this.getJobname());
+        job.setCredate(GetNowDate.getNowDateStr());
+        job.setSalary(this.getSalary());
+        job.setNumber(this.getNumber());
+        job.setAddress(this.getAddress());
+        job.setWorkyear(this.getWorkyear());
+        job.setDegree(this.getDegree());
+        job.setResponsibility(this.getResponsibility());
+        job.setRequirement(this.getRequirement());
+        job.setCategory(this.getCategory());
+        jobService.addJob(job);
+        ActionContext.getContext().getSession().remove("addflag");
+      } else if (null != ActionContext.getContext().getSession().get("addflag") && "false".equals((String)ActionContext.getContext().getSession().get("addflag"))) {
+        Job job = new Job();
+        job.setId(this.getId());
+        job = jobService.findJobById(job);
+        job.setJobname(this.getJobname());
+        job.setCredate(GetNowDate.getNowDateStr());
+        job.setSalary(this.getSalary());
+        job.setNumber(this.getNumber());
+        job.setAddress(this.getAddress());
+        job.setWorkyear(this.getWorkyear());
+        job.setDegree(this.getDegree());
+        job.setResponsibility(this.getResponsibility());
+        job.setRequirement(this.getRequirement());
+        job.setCategory(this.getCategory());
+        jobService.updateJob(job);
+        ActionContext.getContext().getSession().remove("addflag");
+      } else {
+        ServletActionContext.getRequest().setAttribute("msg", "保存职位失败");
+      }
       Company company = (Company) ActionContext.getContext().getApplication().get("company");
-      job.setJobname(this.getJobname());
-      job.setCredate(GetNowDate.getNowDateStr());
-      job.setSalary(this.getSalary());
-      job.setNumber(this.getNumber());
-      job.setAddress(this.getAddress());
-      job.setWorkyear(this.getWorkyear());
-      job.setDegree(this.getDegree());
-      job.setResponsibility(this.getResponsibility());
-      job.setRequirement(this.getRequirement());
-      job.setCategory(this.getCategory());
-      jobService.updateJob(job);
       ActionContext.getContext().getSession().put("jobList", jobService.findJobByCompany(company));
       return SUCCESS;
     } catch (Exception ex) {
@@ -180,7 +201,7 @@ public class JobAction extends ActionSupport {
     } catch (Exception ex) {
       ex.printStackTrace();
       ServletActionContext.getRequest().setAttribute("msg", "搜索职位失败");
-      return ERROR;
+      return "jobseekerError";
     }
   }
 
