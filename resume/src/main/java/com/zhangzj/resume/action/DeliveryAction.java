@@ -15,6 +15,7 @@ import com.zhangzj.resume.service.JobService;
 import com.zhangzj.resume.service.ResumeService;
 import com.zhangzj.resume.service.DeliveryService;
 import com.zhangzj.resume.util.GetNowDate;
+import com.zhangzj.resume.util.Page;
 
 @SuppressWarnings("serial")
 public class DeliveryAction extends ActionSupport {
@@ -24,6 +25,7 @@ public class DeliveryAction extends ActionSupport {
   private int id;
   private String resumeid;
   private String jobid;
+  private String pagenum;
   
   public String addDelivery() {
     try {
@@ -56,19 +58,28 @@ public class DeliveryAction extends ActionSupport {
     }
   }
 
+  @SuppressWarnings("unchecked")
   public String listDelivery() {
     try {
       if (null != ActionContext.getContext().getApplication().get("company")) {
-        List<Delivery> deliveryList = deliveryService.findByCompany((Company) ActionContext.getContext().getApplication().get("company"));
-        for(int i=0; i<deliveryList.size(); i++) {
-          Delivery delivery = deliveryList.get(i);
-          if(null != delivery.getState()) {
-            if ("已回绝".equals(delivery.getState())) {
-              deliveryList.remove(i);
+        if (null == this.getPagenum() || "".equals(this.getPagenum())) {
+          List<Delivery> deliveryList = deliveryService.findByCompany((Company) ActionContext.getContext().getApplication().get("company"));
+          for(int i=0; i<deliveryList.size(); i++) {
+            Delivery delivery = deliveryList.get(i);
+            if(null != delivery.getState()) {
+              if ("已回绝".equals(delivery.getState())) {
+                deliveryList.remove(i);
+                i--;
+              }
             }
           }
+          Page page = new Page(1, deliveryList.size());
+          ServletActionContext.getRequest().setAttribute("page", page);
+          ActionContext.getContext().getSession().put("deliveryList", deliveryList);
+        } else {
+          Page page = new Page(Integer.parseInt(this.getPagenum()), ((List<Delivery>)ActionContext.getContext().getSession().get("deliveryList")).size());
+          ServletActionContext.getRequest().setAttribute("page", page);
         }
-        ActionContext.getContext().getSession().put("deliveryList", deliveryList);
         return "companySuccess";
       } else if(null != ActionContext.getContext().getApplication().get("jobseeker")) {
         List<Delivery> deliveryList = deliveryService.findByJobseeker((Jobseeker) ActionContext.getContext().getApplication().get("jobseeker"));
@@ -115,8 +126,7 @@ public class DeliveryAction extends ActionSupport {
       delivery = deliveryService.findDeliveryById(delivery);
       delivery.setState("已回绝");
       deliveryService.updateDelivery(delivery);
-      ActionContext.getContext().getSession().put("deliveryList", deliveryService.findByJobseeker((Jobseeker) ActionContext.getContext().getApplication().get("company")));
-      return "companySuccess";
+      return "listDelivery";
     } catch (Exception ex) {
       ex.printStackTrace();
       ServletActionContext.getRequest().setAttribute("msg", "回绝简历失败");
@@ -131,7 +141,7 @@ public class DeliveryAction extends ActionSupport {
       delivery = deliveryService.findDeliveryById(delivery);
       delivery.setState("已查看");
       deliveryService.updateDelivery(delivery);
-      ActionContext.getContext().getSession().put("deliveryList", deliveryService.findByJobseeker((Jobseeker) ActionContext.getContext().getApplication().get("jobseeker")));
+      //ActionContext.getContext().getSession().put("deliveryList", deliveryService.findByJobseeker((Jobseeker) ActionContext.getContext().getApplication().get("jobseeker")));
       ServletActionContext.getRequest().setAttribute("resumeid", delivery.getResume().getId());
       return "viewResume";
     } catch (Exception ex) {
@@ -187,6 +197,14 @@ public class DeliveryAction extends ActionSupport {
 
   public void setId(int id) {
     this.id = id;
+  }
+
+  public String getPagenum() {
+    return pagenum;
+  }
+
+  public void setPagenum(String pagenum) {
+    this.pagenum = pagenum;
   }
   
 }

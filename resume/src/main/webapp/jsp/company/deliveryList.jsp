@@ -93,10 +93,10 @@
                             </li>
                             <c:forEach var="s" begin="0" end="${page.maxPage-1}" varStatus="status">
                                <c:if test="${status.index+1 == page.pageNum}">
-                               <li class="active"><a href="searchJob.action?pagenum=${status.index+1}">${status.index+1}</a></li>
+                               <li class="active"><a href="listDelivery.action?pagenum=${status.index+1}">${status.index+1}</a></li>
                                </c:if>
                                <c:if test="${status.index+1 ne page.pageNum}">
-                               <li><a href="searchJob.action?pagenum=${status.index+1}">${status.index+1}</a></li>
+                               <li><a href="listDelivery.action?pagenum=${status.index+1}">${status.index+1}</a></li>
                                </c:if>
                             </c:forEach>
                             <li>
