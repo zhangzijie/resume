@@ -7,7 +7,6 @@ import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import com.zhangzj.resume.entity.Job;
 import com.zhangzj.resume.entity.Jobseeker;
 import com.zhangzj.resume.service.JobseekerService;
 import com.zhangzj.resume.util.Page;
