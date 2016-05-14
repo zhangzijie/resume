@@ -34,13 +34,9 @@ public class CompanyDaoImpl extends BaseDao<Company> implements CompanyDao {
     if (list.size() == 1) {
       return list.get(0);
     } else {
-      try {
-        throw new Exception("can not find Company by username.");
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
+      System.err.println("can not find Company by username, cos no result.");
+      return null;
     }
-    return null;
   }
 
   @Override

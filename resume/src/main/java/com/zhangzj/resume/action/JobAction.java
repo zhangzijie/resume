@@ -35,8 +35,6 @@ public class JobAction extends ActionSupport {
   
   public String addJob() {
     try {
-      
-      
       ActionContext.getContext().getSession().put("addflag", "true");
       return "editJob";
     } catch (Exception ex) {
@@ -66,7 +64,8 @@ public class JobAction extends ActionSupport {
       Job job = new Job();
       job.setId(this.getId());
       job = jobService.findJobById(job);
-      ActionContext.getContext().getSession().put("job", job);
+      //ActionContext.getContext().getSession().put("job", job);
+      ServletActionContext.getRequest().setAttribute("job", job);
       if (null != ActionContext.getContext().getApplication().get("company")) {
         return "companyViewJob";
       } else if(null != ActionContext.getContext().getApplication().get("jobseeker")) {
@@ -179,28 +178,35 @@ public class JobAction extends ActionSupport {
   @SuppressWarnings("unchecked")
   public String searchJob() {
     try {
-      if(null == this.getJobname() || "".equals(this.getJobname())) {
-        ActionContext.getContext().getSession().remove("jobList");
-        return "searchJob";
+      if (null == this.getPagenum() || "".equals(this.getPagenum())) {
+        Properties prop = new Properties();
+        prop.setProperty("jobname", this.getJobname());
+        prop.setProperty("companyname", this.getCompanyname());
+        prop.setProperty("address", this.getAddress());
+        List<Job> jobList = jobService.findJobByProperties(prop);
+        ActionContext.getContext().getSession().put("jobList", jobList);
+        Page page = new Page(1,jobList.size());
+        ServletActionContext.getRequest().setAttribute("page", page);
       } else {
-        if (null == this.getPagenum() || "".equals(this.getPagenum())) {
-          Properties prop = new Properties();
-          prop.setProperty("jobname", this.getJobname());
-          prop.setProperty("companyname", this.getCompanyname());
-          prop.setProperty("address", this.getAddress());
-          List<Job> jobList = jobService.findJobByProperties(prop);
-          ActionContext.getContext().getSession().put("jobList", jobList);
-          Page page = new Page(1,jobList.size());
-          ServletActionContext.getRequest().setAttribute("page", page);
-        } else {
-          Page page = new Page(Integer.parseInt(this.getPagenum()), ((List<Job>)ActionContext.getContext().getSession().get("jobList")).size());
-          ServletActionContext.getRequest().setAttribute("page", page);
-        }
-        return "searchJob";
+        Page page = new Page(Integer.parseInt(this.getPagenum()), ((List<Job>)ActionContext.getContext().getSession().get("jobList")).size());
+        ServletActionContext.getRequest().setAttribute("page", page);
       }
+      this.setPagenum(null);
+      return "searchJob";
     } catch (Exception ex) {
       ex.printStackTrace();
       ServletActionContext.getRequest().setAttribute("msg", "搜索职位失败");
+      return "jobseekerError";
+    }
+  }
+  
+  public String searchpageJob() {
+    try {
+      ActionContext.getContext().getSession().remove("jobList");
+      return "searchJob";
+    } catch (Exception ex) {
+      ex.printStackTrace();
+      ServletActionContext.getRequest().setAttribute("msg", "跳转搜索职位页面失败");
       return "jobseekerError";
     }
   }

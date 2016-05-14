@@ -80,6 +80,7 @@ public class DeliveryAction extends ActionSupport {
           Page page = new Page(Integer.parseInt(this.getPagenum()), ((List<Delivery>)ActionContext.getContext().getSession().get("deliveryList")).size());
           ServletActionContext.getRequest().setAttribute("page", page);
         }
+        this.setPagenum(null);
         return "companySuccess";
       } else if(null != ActionContext.getContext().getApplication().get("jobseeker")) {
         List<Delivery> deliveryList = deliveryService.findByJobseeker((Jobseeker) ActionContext.getContext().getApplication().get("jobseeker"));

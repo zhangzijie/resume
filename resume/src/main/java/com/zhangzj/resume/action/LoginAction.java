@@ -83,6 +83,8 @@ public class LoginAction extends ActionSupport {
     ActionContext.getContext().getApplication().remove("company");
     ActionContext.getContext().getApplication().remove("jobseeker");
     ActionContext.getContext().getApplication().remove("admin");
+    ActionContext.getContext().getSession().clear();
+    ServletActionContext.getRequest().getSession().invalidate();//使HttpSession失效
     return INPUT;
   }
 

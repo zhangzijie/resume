@@ -84,7 +84,6 @@ public class ResumeAction extends ActionSupport {
       }
       resume = resumeService.findResumeById(resume);
       ServletActionContext.getRequest().setAttribute("resume", resume);
-      //ActionContext.getContext().getSession().put("resume", resume);
       return "viewResume";
     } catch (Exception ex) {
       ex.printStackTrace();

@@ -34,13 +34,9 @@ public class JobseekerDaoImpl extends BaseDao<Jobseeker> implements JobseekerDao
     if (list.size() == 1) {
       return list.get(0);
     } else {
-      try {
-        throw new Exception("can not find Jobseeker by username.");
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
+      System.err.println("can not find Jobseeker by username, cos no result.");
+      return null;
     }
-    return null;
   }
 
   @Override
