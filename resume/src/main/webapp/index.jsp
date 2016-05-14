@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>求职简历管理系统</title>
+    <title>求职招聘系统</title>
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/index/index.css" rel="stylesheet">
     <!--[if lt IE 9]>
@@ -18,7 +18,7 @@
   <body>
     <div class="container">
       <div class="center">
-        <h1>求职简历管理系统</h1>
+        <h1>求职招聘系统</h1>
         <div class="header">
           <div class="switch" id="switch">
             <a class="switch_btn_focus" id="switch_signin" href="javascript:void(0);">登录</a>
