@@ -37,12 +37,12 @@ public class CompanyAction extends ActionSupport {
         ServletActionContext.getRequest().setAttribute("companyitem", company);
         return "adminEditCompany";
       } else {
-        ServletActionContext.getRequest().setAttribute("msg", "编辑求职者信息失败");
+        ServletActionContext.getRequest().setAttribute("msg", "编辑招聘单位信息失败");
         return INPUT;
       }
     } catch (Exception ex) {
       ex.printStackTrace();
-      ServletActionContext.getRequest().setAttribute("msg", "编辑求职者信息失败");
+      ServletActionContext.getRequest().setAttribute("msg", "编辑招聘单位信息失败");
       return ERROR;
     }
   }
@@ -74,12 +74,12 @@ public class CompanyAction extends ActionSupport {
         companyService.updateCompany(company, this.getPassword());
         return "listCompany";
       } else {
-        ServletActionContext.getRequest().setAttribute("msg", "保存求职者信息失败");
+        ServletActionContext.getRequest().setAttribute("msg", "保存招聘单位信息失败");
         return INPUT;
       }
     } catch (Exception ex) {
       ex.printStackTrace();
-      ServletActionContext.getRequest().setAttribute("msg", "保存求职者信息失败");
+      ServletActionContext.getRequest().setAttribute("msg", "保存招聘单位信息失败");
       return ERROR;
     }
   }
@@ -99,7 +99,7 @@ public class CompanyAction extends ActionSupport {
       return "adminSuccess";
     } catch (Exception ex) {
       ex.printStackTrace();
-      ServletActionContext.getRequest().setAttribute("msg", "查看求职者列表失败");
+      ServletActionContext.getRequest().setAttribute("msg", "查看招聘单位列表失败");
       return "adminError";
     }
   }
@@ -124,7 +124,7 @@ public class CompanyAction extends ActionSupport {
       return "adminSuccess";
     } catch (Exception ex) {
       ex.printStackTrace();
-      ServletActionContext.getRequest().setAttribute("msg", "搜索求职者失败");
+      ServletActionContext.getRequest().setAttribute("msg", "搜索招聘单位失败");
       return "adminError";
     }
   }
@@ -138,7 +138,7 @@ public class CompanyAction extends ActionSupport {
       return "listCompany";
     } catch (Exception ex) {
       ex.printStackTrace();
-      ServletActionContext.getRequest().setAttribute("msg", "删除求职者失败");
+      ServletActionContext.getRequest().setAttribute("msg", "删除招聘单位失败");
       return "adminError";
     }
   }
