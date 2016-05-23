@@ -139,7 +139,7 @@ public class CompanyAction extends ActionSupport {
     } catch (Exception ex) {
       ex.printStackTrace();
       ServletActionContext.getRequest().setAttribute("msg", "删除求职者失败");
-      return ERROR;
+      return "adminError";
     }
   }
 
